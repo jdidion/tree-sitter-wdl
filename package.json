@@ -1,6 +1,6 @@
 {
   "name": "treesitter-wdl",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "TreeSitter grammar for WDL v1.1",
   "main": "bindings/node",
   "keywords": [
