@@ -1,0 +1,168 @@
+=======
+Strings
+=======
+
+version 1.1
+
+workflow Test {
+    String s1 = ""
+    String s2 = ''
+    String s3 = "hello"
+    String s4 = "hello \"John\", how are you?"
+    String s5 = 'hello'
+    String s6 = 'hello \'John\', how are you?'
+    String s7 = "hello 'John', how are you?"
+    String s8 = 'hello "John", how are you?'
+    String s9 = "hello ~{name}, how are you?"
+    String s9 = "hello \"~{name}\", how are you?"
+    String s9 = "hello ~{sep(" ", ['John', 'Doe'])}, how are you?"
+}
+
+---
+
+(document
+    (version
+        identifier: (float)
+    )
+    (workflow
+        name: (identifier)
+        body: (workflow_body
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string)
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string)
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                        (escape_sequence)
+                        (string_content)
+                        (escape_sequence)
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                        (escape_sequence)
+                        (string_content)
+                        (escape_sequence)
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                        (placeholder
+                            expression: (identifier)
+                        )
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                        (escape_sequence)
+                        (placeholder
+                            expression: (identifier)
+                        )
+                        (escape_sequence)
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                        (placeholder
+                            expression: (apply_expression
+                                name: (identifier)
+                                arguments: (argument_list
+                                    (string
+                                        parts: (string_parts
+                                            (string_content)
+                                        )
+                                    )
+                                    (array
+                                        elements: (array_elements
+                                            (string
+                                                parts: (string_parts
+                                                    (string_content)
+                                                )
+                                            )
+                                            (string
+                                                parts: (string_parts
+                                                    (string_content)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                        (string_content)
+                    )
+                )
+            )
+        )
+    )
+)

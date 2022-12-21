@@ -1,0 +1,427 @@
+==================
+Comprehensive Test
+==================
+
+version 1.1
+
+import "local.wdl" as local alias Foo as Bar
+import "https://example.com/remote.wdl" as remote alias Baz as Blorf
+
+struct Example1 {
+    Float f
+    Map[String, Int] m
+}
+
+struct Example2 {
+    String s
+    Int? i
+    Array[File?]+ a
+    Example1 e
+}
+
+workflow Workflow1 {
+    input {
+        String s
+        Int i = 0
+        Example2? ex
+    }
+
+    Float f = i + 1.0
+    Array[File] file_array = if defined(ex) then select_all(select_first([ex]).a) else []
+
+    call local.foo
+    call local.foo as bar {}
+    call local.baz {
+        input:
+    }
+    call local.qux {
+        input:
+            x = 1,
+            y = false
+    }
+
+    if (1 > 2) {
+        scatter (file in file_array) {
+            call remote.waldo {
+                input: file
+            }
+        }
+    }
+
+    output {
+        File f = task1.name_file
+    }
+
+    meta {
+        description: "Test workflow"
+        test: true
+        size: 10
+        numbers: [1, 2, 3]
+        keywords: {
+            a: 1.0,
+            b: -1
+        }
+        x: null
+    }
+}
+
+task Task1 {
+    input {
+        String name
+        Example2? ex
+        String docker_image
+    }
+
+    command <<<
+    echo ~{name} \
+        | cat
+    >>>
+
+    output {
+        File name_file = stdout()
+    }
+    
+    runtime {
+        container: docker_image
+    }
+
+    meta {
+        description: "write name to file"
+    }
+}
+
+---
+
+(document
+    (version
+        identifier: (float)
+    )
+    (import
+        uri: (simple_string
+            parts: (string_parts)
+        )
+        namespace: (identifier)
+        aliases: (import_aliases
+            (import_alias 
+                from: (identifier)
+                to: (identifier)
+            )
+        )
+    )
+    (import
+        uri: (simple_string
+            parts: (string_parts)
+        )
+        namespace: (identifier)
+        aliases: (import_aliases
+            (import_alias 
+                from: (identifier)
+                to: (identifier)
+            )
+        )
+    )
+    (struct
+        name: (identifier)
+        fields: (struct_fields
+            (struct_field
+                type: (type)
+                name: (identifier)
+            )
+            (struct_field
+                type: (type
+                    (map_type
+                        key: (type)
+                        value: (type)
+                    )
+                )
+                name: (identifier)
+            )
+        )
+    )
+    (struct
+        name: (identifier)
+        fields: (struct_fields
+            (struct_field
+                type: (type)
+                name: (identifier)
+            )
+            (struct_field
+                type: (type
+                    optional: (true)
+                )
+                name: (identifier)
+            )
+            (struct_field
+                type: (type
+                    (array_type
+                        type: (type
+                            optional: (true)
+                        )
+                        non_empty: (true)
+                    )
+                )
+                name: (identifier)
+            )
+            (struct_field
+                type: (type
+                    name: (identifier)
+                )
+                name: (identifier)
+            )
+        )
+    )
+    (workflow
+        name: (identifier)
+        body: (workflow_body
+            (input
+                declarations: (input_declarations
+                    (unbound_declaration
+                        type: (type)
+                        name: (identifier)
+                    )
+                    (bound_declaration
+                        type: (type)
+                        name: (identifier)
+                        expression: (dec_int)
+                    )
+                    (unbound_declaration
+                        type: (type
+                            name: (identifier)
+                            optional: (true)
+                        )
+                        name: (identifier)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (type)
+                name: (identifier)
+                expression: (binary_operator
+                    left: (identifier)
+                    right: (float)
+                )
+            )
+            (bound_declaration
+                type: (type
+                    (array_type
+                        type: (type)
+                    )
+                )
+                name: (identifier)
+                expression: (ternary_expression
+                    condition: (apply_expression
+                        name: (identifier)
+                        arguments: (argument_list
+                            (identifier)
+                        )
+                    )
+                    true: (apply_expression
+                        name: (identifier)
+                        arguments: (argument_list
+                            (field_expression
+                                object: (apply_expression
+                                    name: (identifier)
+                                    arguments: (argument_list
+                                        (array
+                                            elements: (array_elements
+                                                (identifier)
+                                            )
+                                        )
+                                    )
+                                )
+                                name: (identifier)
+                            )
+                        )
+                    )
+                    false: (array
+                        elements: (array_elements)
+                    )
+                )   
+            )
+            (call
+                target: (qualified_identifier
+                    (identifier)
+                    (identifier)
+                )
+            )
+            (call
+                target: (qualified_identifier
+                    (identifier)
+                    (identifier)
+                )
+                alias: (identifier)
+                inputs: (call_inputs)
+            )
+            (call
+                target: (qualified_identifier
+                    (identifier)
+                    (identifier)
+                )
+                inputs: (call_inputs)
+            )
+            (call
+                target: (qualified_identifier
+                    (identifier)
+                    (identifier)
+                )
+                inputs: (call_inputs
+                    (call_input
+                        name: (identifier)
+                        expression: (dec_int)
+                    )
+                    (call_input
+                        name: (identifier)
+                        expression: (false)
+                    )
+                )
+            )
+            (conditional
+                expression: (comparison_operator
+                    left: (dec_int)
+                    right: (dec_int)
+                )
+                body: (conditional_body
+                    (scatter
+                        name: (identifier)
+                        expression: (identifier)
+                        body: (scatter_body
+                            (call
+                                target: (qualified_identifier
+                                    (identifier)
+                                    (identifier)
+                                )
+                                inputs: (call_inputs
+                                    (call_input
+                                        name: (identifier)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+            (output
+                declarations: (output_declarations
+                    (bound_declaration
+                        type: (type)
+                        name: (identifier)
+                        expression: (field_expression
+                            object: (identifier)
+                            name: (identifier)
+                        )
+                    )
+                )
+            )
+            (meta
+                attributes: (meta_attributes
+                    (meta_attribute
+                        name: (identifier)
+                        value: (simple_string
+                            parts: (string_parts)
+                        )
+                    )
+                    (meta_attribute
+                        name: (identifier)
+                        value: (true)
+                    )
+                    (meta_attribute
+                        name: (identifier)
+                        value: (dec_int)
+                    )
+                    (meta_attribute
+                        name: (identifier)
+                        value: (meta_array
+                            elements: (meta_array_elements
+                                (dec_int)
+                                (dec_int)
+                                (dec_int)
+                            )
+                        )
+                    )
+                    (meta_attribute
+                        name: (identifier)
+                        value: (meta_object
+                            fields: (meta_object_fields
+                                (meta_object_field
+                                    name: (identifier)
+                                    value: (float)
+                                )
+                                (meta_object_field
+                                    name: (identifier)
+                                    value: (signed_number (dec_int))
+                                )
+                            )
+                        )
+                    )
+                    (meta_attribute
+                        name: (identifier)
+                        value: (null)
+                    )
+                )
+            )
+        )
+    )
+    (task
+        name: (identifier)
+        body: (task_elements
+            (input
+                declarations: (input_declarations
+                    (unbound_declaration
+                        type: (type)
+                        name: (identifier)
+                    )
+                    (unbound_declaration
+                        type: (type
+                            name: (identifier)
+                            optional: (true)
+                        )
+                        name: (identifier)
+                    )
+                    (unbound_declaration
+                        type: (type)
+                        name: (identifier)
+                    )
+                )
+            )
+            (command
+                parts: (command_parts
+                    (command_content)
+                    (placeholder
+                        expression: (identifier)
+                    )
+                    (command_content)
+                )
+            )
+            (output
+                declarations: (output_declarations
+                    (bound_declaration
+                        type: (type)
+                        name: (identifier)
+                        expression: (apply_expression
+                            name: (identifier)
+                            arguments: (argument_list)
+                        )
+                    )
+                )
+            )
+            (runtime
+                attributes: (runtime_attributes
+                    (runtime_attribute
+                        name: (identifier)
+                        expression: (identifier)
+                    )
+                )
+            )
+            (meta
+                attributes: (meta_attributes
+                    (meta_attribute
+                        name: (identifier)
+                        value: (simple_string
+                            parts: (string_parts)
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
