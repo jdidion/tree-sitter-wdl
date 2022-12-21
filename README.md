@@ -2,6 +2,15 @@
 
 [Tree-sitter](https://github.com/tree-sitter/tree-sitter) grammar for [WDL](https://openwdl.org/) (Workflow Description Language).
 
+## Usage
+
+See the [Tree-sitter documentation](https://tree-sitter.github.io/tree-sitter/using-parsers) for the list of available language bindings and basic usage information. To use the [Rust binding](https://crates.io/crates/tree-sitter-wdl-1), add the following to your Cargo.toml:
+
+```toml
+[dependencies]
+tree-sitter-wdl-1 = "0.1.0"
+```
+
 ## Design
 
 This repository provides a single [grammar](grammar.js) that parses WDL versions `1.x` (`draft-*` and `development` versions are *not* supported). The grammar is designed to be permissive and error-tolerant. A parser generated from this grammar will allow token combinations that are forbidden by the WDL specification or that are only allowed in certain WDL versions.
