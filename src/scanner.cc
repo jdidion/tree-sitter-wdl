@@ -1,5 +1,6 @@
 #include <tree_sitter/parser.h>
 #include <cassert>
+#include <cstring>
 #include <vector>
 
 namespace
