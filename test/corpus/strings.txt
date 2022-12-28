@@ -28,17 +28,17 @@ workflow Test {
         name: (identifier)
         body: (workflow_body
             (bound_declaration
-                type: (type)
+                type: (string_type)
                 name: (identifier)
                 expression: (string)
             )
             (bound_declaration
-                type: (type)
+                type: (string_type)
                 name: (identifier)
                 expression: (string)
             )
             (bound_declaration
-                type: (type)
+                type: (string_type)
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
@@ -47,29 +47,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (string_content)
-                        (escape_sequence)
-                        (string_content)
-                        (escape_sequence)
-                        (string_content)
-                    )
-                )
-            )
-            (bound_declaration
-                type: (type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (string_content)
-                    )
-                )
-            )
-            (bound_declaration
-                type: (type)
+                type: (string_type)
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
@@ -82,7 +60,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (string_type)
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
@@ -91,7 +69,20 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (string_type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                        (escape_sequence)
+                        (string_content)
+                        (escape_sequence)
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (string_type)
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
@@ -100,7 +91,16 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (string_type)
+                name: (identifier)
+                expression: (string
+                    parts: (string_parts
+                        (string_content)
+                    )
+                )
+            )
+            (bound_declaration
+                type: (string_type)
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
@@ -113,7 +113,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (string_type)
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
@@ -128,7 +128,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (string_type)
                 name: (identifier)
                 expression: (string
                     parts: (string_parts

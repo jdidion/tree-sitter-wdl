@@ -98,7 +98,9 @@ task Task1 {
     )
     (import
         uri: (simple_string
-            parts: (string_parts)
+            parts: (string_parts
+                (string_content)
+            )
         )
         namespace: (identifier)
         aliases: (import_aliases
@@ -110,7 +112,9 @@ task Task1 {
     )
     (import
         uri: (simple_string
-            parts: (string_parts)
+            parts: (string_parts
+                (string_content)
+            )
         )
         namespace: (identifier)
         aliases: (import_aliases
@@ -124,15 +128,13 @@ task Task1 {
         name: (identifier)
         fields: (struct_fields
             (struct_field
-                type: (type)
+                type: (float_type)
                 name: (identifier)
             )
             (struct_field
-                type: (type
-                    (map_type
-                        key: (type)
-                        value: (type)
-                    )
+                type: (map_type
+                    key: (string_type)
+                    value: (int_type)
                 )
                 name: (identifier)
             )
@@ -142,28 +144,25 @@ task Task1 {
         name: (identifier)
         fields: (struct_fields
             (struct_field
-                type: (type)
+                type: (string_type)
                 name: (identifier)
             )
             (struct_field
-                type: (type
-                    optional: (true)
+                type: (optional_type
+                    type: (int_type)
                 )
                 name: (identifier)
             )
             (struct_field
-                type: (type
-                    (array_type
-                        type: (type
-                            optional: (true)
-                        )
-                        non_empty: (true)
+                type: (nonempty_array_type
+                    type: (optional_type
+                        type: (file_type)
                     )
                 )
                 name: (identifier)
             )
             (struct_field
-                type: (type
+                type: (user_type
                     name: (identifier)
                 )
                 name: (identifier)
@@ -176,25 +175,26 @@ task Task1 {
             (input
                 declarations: (input_declarations
                     (unbound_declaration
-                        type: (type)
+                        type: (string_type)
                         name: (identifier)
                     )
                     (bound_declaration
-                        type: (type)
+                        type: (int_type)
                         name: (identifier)
                         expression: (dec_int)
                     )
                     (unbound_declaration
-                        type: (type
-                            name: (identifier)
-                            optional: (true)
+                        type: (optional_type
+                            type: (user_type
+                                name: (identifier)
+                            )
                         )
                         name: (identifier)
                     )
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (float_type)
                 name: (identifier)
                 expression: (binary_operator
                     left: (identifier)
@@ -202,10 +202,8 @@ task Task1 {
                 )
             )
             (bound_declaration
-                type: (type
-                    (array_type
-                        type: (type)
-                    )
+                type: (array_type
+                    type: (file_type)
                 )
                 name: (identifier)
                 expression: (ternary_expression
@@ -303,7 +301,7 @@ task Task1 {
             (output
                 declarations: (output_declarations
                     (bound_declaration
-                        type: (type)
+                        type: (file_type)
                         name: (identifier)
                         expression: (field_expression
                             object: (identifier)
@@ -317,7 +315,9 @@ task Task1 {
                     (meta_attribute
                         name: (identifier)
                         value: (simple_string
-                            parts: (string_parts)
+                            parts: (string_parts
+                                (string_content)
+                            )
                         )
                     )
                     (meta_attribute
@@ -348,7 +348,7 @@ task Task1 {
                                 )
                                 (meta_object_field
                                     name: (identifier)
-                                    value: (signed_number (dec_int))
+                                    value: (dec_int)
                                 )
                             )
                         )
@@ -367,18 +367,19 @@ task Task1 {
             (input
                 declarations: (input_declarations
                     (unbound_declaration
-                        type: (type)
+                        type: (string_type)
                         name: (identifier)
                     )
                     (unbound_declaration
-                        type: (type
-                            name: (identifier)
-                            optional: (true)
+                        type: (optional_type
+                            type: (user_type
+                                name: (identifier)
+                            )
                         )
                         name: (identifier)
                     )
                     (unbound_declaration
-                        type: (type)
+                        type: (string_type)
                         name: (identifier)
                     )
                 )
@@ -395,7 +396,7 @@ task Task1 {
             (output
                 declarations: (output_declarations
                     (bound_declaration
-                        type: (type)
+                        type: (file_type)
                         name: (identifier)
                         expression: (apply_expression
                             name: (identifier)
@@ -417,7 +418,9 @@ task Task1 {
                     (meta_attribute
                         name: (identifier)
                         value: (simple_string
-                            parts: (string_parts)
+                            parts: (string_parts
+                                (string_content)
+                            )
                         )
                     )
                 )

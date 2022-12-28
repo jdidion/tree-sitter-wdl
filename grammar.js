@@ -90,6 +90,7 @@ const SYMBOL = {
 
 // precedences
 const PREC = {
+    number: 12,
     group: 11,
     member: 10,
     index: 9,
@@ -343,61 +344,85 @@ module.exports = grammar({
         output_declarations: $ => block(repeat1($.bound_declaration)),
 
         unbound_declaration: $ => seq(
-            field("type", $.type),
+            field("type", $._type),
             field("name", $.identifier),
         ),
 
         bound_declaration: $ => seq(
-            field("type", $.type),
+            field("type", $._type),
             field("name", $.identifier),
             OPER.assign,
             field("expression", $.expression)
         ),
 
-        type: $ => seq(
-            choice(
-                prec(1, field("name", choice(
-                    KEYWORD.boolean,
-                    KEYWORD.int,
-                    KEYWORD.float,
-                    KEYWORD.string,
-                    KEYWORD.file,
-                    KEYWORD.object
-                ))),
-                prec(1, choice(
-                    $.array_type,
-                    $.map_type,
-                    $.pair_type
-                )),
-                // user-defined type (struct)
-                prec(0, field("name", $.identifier))
-            ),
-            field("optional", alias(optional(OPER.optional), $.true))
+        _type: $ => prec.right(choice(
+            $.optional_type,
+            $._required_type,
+        )),
+
+        optional_type: $ => seq(
+            field("type", $._required_type),
+            OPER.optional
         ),
 
-        array_type: $ => seq(
-            field("name", KEYWORD.array),
+        _required_type: $ => choice(
+            $._simple_type,
+            $._array_type,
+            $.map_type,
+            $.pair_type,
+            $.user_type
+        ),
+
+        _simple_type: $ => prec(1, choice(
+            $.boolean_type,
+            $.int_type,
+            $.float_type,
+            $.string_type,
+            $.file_type,
+            $.object_type
+        )),
+
+        boolean_type: $ => KEYWORD.boolean,
+        int_type: $ => KEYWORD.int,
+        float_type: $ => KEYWORD.float,
+        string_type: $ => KEYWORD.string,
+        file_type: $ => KEYWORD.file,
+        object_type: $ => KEYWORD.object,
+
+        user_type: $ => prec(0, field("name", $.identifier)),
+
+        _array_type: $ => prec.right(choice(
+            $.nonempty_array_type,
+            alias($._maybe_empty_array_type, $.array_type)
+        )),
+
+        nonempty_array_type: $ => seq(
+            $._maybe_empty_array_type,
+            OPER.non_empty,
+        ),
+
+        _maybe_empty_array_type: $ => seq(
+            KEYWORD.array,
             SYMBOL.lbrack,
-            field("type", $.type),
+            field("type", $._type),
             SYMBOL.rbrack,
-            field("non_empty", alias(optional(OPER.non_empty), $.true))
         ),
 
         map_type: $ => seq(
-            field("name", KEYWORD.map),
+            KEYWORD.map,
             SYMBOL.lbrack,
-            field("key", $.type),
+            field("key", $._type),
             ",",
-            field("value", $.type),
+            field("value", $._type),
             SYMBOL.rbrack
         ),
 
         pair_type: $ => seq(
-            field("name", KEYWORD.pair),
+            KEYWORD.pair,
             SYMBOL.lbrack,
-            field("left", $.type),
+            field("left", $._type),
             ",",
-            field("right", $.type),
+            field("right", $._type),
             SYMBOL.rbrack
         ),
 
@@ -515,17 +540,18 @@ module.exports = grammar({
 
         oct_int: $ => token(seq(choice('0o', '0O'), /[0-7]+/)),
 
-        dec_int: $ => token(repeat1(/\d+/)),
+        dec_int: $ => prec.right(PREC.number, token(/[\+-]?\d+/)),
 
         float: $ => {
+            const sign = /[\+-]?/
             const digits = /\d+/
             const exponent = seq(/[eE][\+-]?/, digits)
 
-            return token(choice(
-                seq(digits, '.', optional(digits), optional(exponent)),
-                seq(optional(digits), '.', digits, optional(exponent)),
-                seq(digits, exponent)
-            ))
+            return prec.right(PREC.number, token(choice(
+                seq(sign, digits, '.', optional(digits), optional(exponent)),
+                seq(sign, optional(digits), '.', digits, optional(exponent)),
+                seq(sign, digits, exponent)
+            )))
         },
 
         string: $ => seq(
@@ -558,14 +584,14 @@ module.exports = grammar({
         simple_string_squote_parts: $ => repeat1(
             choice(
                 $.escape_sequence,
-                /[^'\\\n]+/
+                alias(/[^'\\\n]+/, $.string_content)
             )
         ),
 
         simple_string_dquote_parts: $ => repeat1(
             choice(
                 $.escape_sequence,
-                /[^"\\\n]+/
+                alias(/[^"\\\n]+/, $.string_content)
             )
         ),
 
@@ -724,18 +750,12 @@ module.exports = grammar({
             $.null,
             $._bool,
             $._number,
-            $.signed_number,
             $.simple_string,
             $.meta_array,
             $.meta_object
         ),
 
         null: $ => KEYWORD.null,
-
-        signed_number: $ => seq(
-            field("sign", choice(OPER.add, OPER.sub)),
-            $._number
-        ),
 
         meta_array: $ => field("elements", $.meta_array_elements),
 

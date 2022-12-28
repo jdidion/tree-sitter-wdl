@@ -52,7 +52,7 @@ workflow Test {
 
     Int bin1 = 1 + 2 + 3
     Int bin2 = 1 + 2 * 3
-    Int bin3 = (1 + 2) * 3
+    Int bin3 = -(1 + 2) * 3
     Float bin4 = bin2 / bin3
 
     Boolean bool1 = true && false 
@@ -79,88 +79,78 @@ workflow Test {
         body: (workflow_body
             (comment)
             (bound_declaration
-                type: (type)
+                type: (boolean_type)
                 name: (identifier)
                 expression: (true)
             )
             (bound_declaration
-                type: (type)
+                type: (boolean_type)
                 name: (identifier)
                 expression: (false)
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
                 expression: (dec_int)
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
-                expression: (unary_operator
-                    expression: (dec_int)
-                )
+                expression: (dec_int)
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
-                expression: (unary_operator
-                    expression: (dec_int)
-                )
+                expression: (dec_int)
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
                 expression: (hex_int)
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
                 expression: (oct_int)
             )
             (bound_declaration
-                type: (type)
+                type: (float_type)
                 name: (identifier)
                 expression: (float)
             )
             (bound_declaration
-                type: (type)
+                type: (float_type)
                 name: (identifier)
                 expression: (float)
             )
             (bound_declaration
-                type: (type)
+                type: (float_type)
                 name: (identifier)
                 expression: (float)
             )
             (bound_declaration
-                type: (type)
+                type: (float_type)
                 name: (identifier)
                 expression: (float)
             )
             (bound_declaration
-                type: (type)
+                type: (float_type)
                 name: (identifier)
                 expression: (float)
             )
             (bound_declaration
-                type: (type)
+                type: (float_type)
                 name: (identifier)
-                expression: (unary_operator
-                    expression: (float)
-                )
+                expression: (float)
             )
             (bound_declaration
-                type: (type)
+                type: (float_type)
                 name: (identifier)
-                expression: (unary_operator
-                    expression: (float)
-                )
+                expression: (float)
             )
             (bound_declaration
-                type: (type
-                    (array_type
-                        type: (type)
-                    )
+                type: (array_type
+                    type: (int_type)
                 )
                 name: (identifier)
                 expression: (array
@@ -168,10 +158,8 @@ workflow Test {
                 )   
             )
             (bound_declaration
-                type: (type
-                    (array_type
-                        type: (type)
-                    )
+                type: (array_type
+                    type: (int_type)
                 )
                 name: (identifier)
                 expression: (array
@@ -183,23 +171,19 @@ workflow Test {
                 )   
             )
             (bound_declaration
-                type: (type
-                    (map_type
-                        key: (type)
-                        value: (type)
-                    )
-                )
+                type: (map_type
+                    key: (int_type)
+                    value: (boolean_type)
+                )        
                 name: (identifier)
                 expression: (map
                     entries: (map_entries)
                 )
             )
             (bound_declaration
-                type: (type
-                    (map_type
-                        key: (type)
-                        value: (type)
-                    )
+                type: (map_type
+                    key: (int_type)
+                    value: (boolean_type)
                 )
                 name: (identifier)
                 expression: (map
@@ -216,29 +200,25 @@ workflow Test {
                 )   
             )
             (bound_declaration
-                type: (type
-                    (pair_type
-                        left: (type)
-                        right: (type)
-                    )
+                type: (pair_type
+                    left: (int_type)
+                    right: (float_type)
                 )
                 name: (identifier)
                 expression: (pair
-                    left: (unary_operator
-                        expression: (dec_int)
-                    )
+                    left: (dec_int)
                     right: (float)
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (object_type)
                 name: (identifier)
                 expression: (object
                     fields: (object_fields)
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (object_type)
                 name: (identifier)
                 expression: (object
                     fields: (object_fields
@@ -252,15 +232,13 @@ workflow Test {
                         )
                         (object_field
                             name: (identifier)
-                            expression: (unary_operator
-                                expression: (float)
-                            )
+                            expression: (float)
                         )
                     )
                 )
             )
             (bound_declaration
-                type: (type 
+                type: (user_type 
                     name: (identifier)
                 )
                 name: (identifier)
@@ -277,16 +255,14 @@ workflow Test {
                         )
                         (object_field
                             name: (identifier)
-                            expression: (unary_operator
-                                expression: (float)
-                            )
+                            expression: (float)
                         )
                     )
                 )
             )
             (comment)
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
                 expression: (binary_operator
                     left: (binary_operator
@@ -297,7 +273,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
                 expression: (binary_operator
                     left: (dec_int)
@@ -308,20 +284,22 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
                 expression: (binary_operator
-                    left: (group_expression
-                        expression: (binary_operator
-                            left: (dec_int)
-                            right: (dec_int)
+                    left: (unary_operator
+                        expression: (group_expression
+                            expression: (binary_operator
+                                left: (dec_int)
+                                right: (dec_int)
+                            )
                         )
                     )
                     right: (dec_int)
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (float_type)
                 name: (identifier)
                 expression: (binary_operator
                     left: (identifier)
@@ -329,7 +307,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (boolean_type)
                 name: (identifier)
                 expression: (and_operator
                     left: (true)
@@ -337,7 +315,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (boolean_type)
                 name: (identifier)
                 expression: (comparison_operator
                     left: (dec_int)
@@ -345,7 +323,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (boolean_type)
                 name: (identifier)
                 expression: (or_operator
                     left: (comparison_operator
@@ -359,7 +337,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (boolean_type)
                 name: (identifier)
                 expression: (not_operator
                     expression: (group_expression
@@ -371,13 +349,11 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type
-                    (array_type
-                        type: (type
-                            optional: (true)
-                        )
+                type: (array_type
+                    type: (optional_type
+                        type: (int_type)
                     )
-                )
+                )    
                 name: (identifier)
                 expression: (array
                     elements: (array_elements
@@ -387,8 +363,8 @@ workflow Test {
                 )   
             )
             (bound_declaration
-                type: (type
-                    optional: (true)
+                type: (optional_type
+                    type: (int_type)
                 )
                 name: (identifier)
                 expression: (index_expression
@@ -397,7 +373,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
                 expression: (apply_expression
                     name: (identifier)
@@ -407,7 +383,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
                 expression: (apply_expression
                     name: (identifier)
@@ -424,7 +400,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (boolean_type)
                 name: (identifier)
                 expression: (field_expression
                     object: (identifier)
@@ -432,7 +408,7 @@ workflow Test {
                 )
             )
             (bound_declaration
-                type: (type)
+                type: (int_type)
                 name: (identifier)
                 expression: (ternary_expression
                     condition: (comparison_operator
