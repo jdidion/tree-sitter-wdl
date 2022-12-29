@@ -1919,10 +1919,6 @@
         {
           "type": "placeholder",
           "named": true
-        },
-        {
-          "type": "string_content",
-          "named": true
         }
       ]
     }
@@ -2579,10 +2575,6 @@
   {
     "type": "scatter",
     "named": false
-  },
-  {
-    "type": "string_content",
-    "named": true
   },
   {
     "type": "string_type",

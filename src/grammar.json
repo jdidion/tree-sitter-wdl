@@ -2192,7 +2192,7 @@
               "value": "[^'\\\\\\n]+"
             },
             "named": true,
-            "value": "string_content"
+            "value": "content"
           }
         ]
       }
@@ -2213,7 +2213,7 @@
               "value": "[^\"\\\\\\n]+"
             },
             "named": true,
-            "value": "string_content"
+            "value": "content"
           }
         ]
       }

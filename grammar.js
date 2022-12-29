@@ -576,14 +576,14 @@ module.exports = grammar({
         simple_string_squote_parts: $ => repeat1(
             choice(
                 $.escape_sequence,
-                alias(/[^'\\\n]+/, $.string_content)
+                alias(/[^'\\\n]+/, $.content)
             )
         ),
 
         simple_string_dquote_parts: $ => repeat1(
             choice(
                 $.escape_sequence,
-                alias(/[^"\\\n]+/, $.string_content)
+                alias(/[^"\\\n]+/, $.content)
             )
         ),
 

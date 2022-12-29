@@ -99,7 +99,7 @@ task Task1 {
     (import
         uri: (simple_string
             parts: (string_parts
-                (string_content)
+                (content)
             )
         )
         namespace: (identifier)
@@ -113,7 +113,7 @@ task Task1 {
     (import
         uri: (simple_string
             parts: (string_parts
-                (string_content)
+                (content)
             )
         )
         namespace: (identifier)
@@ -316,7 +316,7 @@ task Task1 {
                         name: (identifier)
                         value: (simple_string
                             parts: (string_parts
-                                (string_content)
+                                (content)
                             )
                         )
                     )
@@ -419,7 +419,7 @@ task Task1 {
                         name: (identifier)
                         value: (simple_string
                             parts: (string_parts
-                                (string_content)
+                                (content)
                             )
                         )
                     )
