@@ -270,22 +270,17 @@ module.exports = grammar({
             field("body", $.task_elements),
         ),
 
-        task_elements: $ => choice(
-            seq(SYMBOL.lbrace, SYMBOL.rbrace),
-            seq(
-                SYMBOL.lbrace,
-                repeat1(
-                    choice(
-                        $.input,
-                        $.output,
-                        $.bound_declaration,
-                        $.command,
-                        $.runtime,
-                        $.meta,
-                        $.parameter_meta
-                    )
-                ),
-                SYMBOL.rbrace
+        task_elements: $ => block(
+            repeat1(
+                choice(
+                    $.input,
+                    $.output,
+                    $.bound_declaration,
+                    $.command,
+                    $.runtime,
+                    $.meta,
+                    $.parameter_meta
+                )
             )
         ),
 
@@ -300,7 +295,7 @@ module.exports = grammar({
             choice(
                 $.placeholder,
                 alias($.command_escape_sequence, $.escape_sequence),
-                $.command_content,
+                alias($.command_content, $.content)
             )
         ),
 
@@ -472,13 +467,10 @@ module.exports = grammar({
             field("arguments", $.argument_list)
         )),
 
-        argument_list: $ => choice(
-            seq(SYMBOL.lparen, SYMBOL.rparen),
-            seq(
-                SYMBOL.lparen,
-                commaSep1($.expression),
-                SYMBOL.rparen
-            )
+        argument_list: $ => seq(
+            SYMBOL.lparen,
+            optional(commaSep1($.expression)),
+            SYMBOL.rparen
         ),
 
         index_expression: $ => prec(PREC.index, seq(
@@ -564,7 +556,7 @@ module.exports = grammar({
             choice(
                 $.placeholder,
                 $.escape_sequence,
-                $.string_content
+                alias($.string_content, $.content)
             )
         ),
 
@@ -625,25 +617,15 @@ module.exports = grammar({
 
         array: $ => field("elements", $.array_elements),
 
-        array_elements: $ => choice(
-            seq(SYMBOL.lbrack, SYMBOL.rbrack),
-            seq(
-                SYMBOL.lbrack,
-                commaSep1($.expression),
-                SYMBOL.rbrack
-            )
+        array_elements: $ => seq(
+            SYMBOL.lbrack,
+            optional(commaSep1($.expression)),
+            SYMBOL.rbrack
         ),
 
         map: $ => field("entries", $.map_entries),
 
-        map_entries: $ => choice(
-            seq(SYMBOL.lbrace, SYMBOL.rbrace),
-            seq(
-                SYMBOL.lbrace,
-                commaSep1($.map_entry),
-                SYMBOL.rbrace
-            )
-        ),
+        map_entries: $ => block(commaSep1($.map_entry)),
 
         map_entry: $ => seq(
             field("key", $.expression),
@@ -667,14 +649,7 @@ module.exports = grammar({
             field("fields", $.object_fields)
         ),
 
-        object_fields: $ => choice(
-            seq(SYMBOL.lbrace, SYMBOL.rbrace),
-            seq(
-                SYMBOL.lbrace,
-                commaSep1($.object_field),
-                SYMBOL.rbrace
-            )
-        ),
+        object_fields: $ => block(commaSep1($.object_field)),
 
         object_field: $ => seq(
             field("name", $.identifier),
@@ -759,13 +734,10 @@ module.exports = grammar({
 
         meta_array: $ => field("elements", $.meta_array_elements),
 
-        meta_array_elements: $ => choice(
-            seq(SYMBOL.lbrack, SYMBOL.rbrack),
-            seq(
-                SYMBOL.lbrack,
-                commaSep1($._meta_value),
-                SYMBOL.rbrack
-            )
+        meta_array_elements: $ => seq(
+            SYMBOL.lbrack,
+            optional(commaSep1($._meta_value)),
+            SYMBOL.rbrack
         ),
 
         meta_object: $ => field("fields", $.meta_object_fields),
@@ -796,12 +768,9 @@ function commaSep1(rule) {
 }
 
 function block(rule) {
-    return choice(
-        seq(SYMBOL.lbrace, SYMBOL.rbrace),
-        seq(
-            SYMBOL.lbrace,
-            rule,
-            SYMBOL.rbrace
-        )
+    return seq(
+        SYMBOL.lbrace,
+        optional(rule),
+        SYMBOL.rbrace
     )
 }

@@ -42,7 +42,7 @@ workflow Test {
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
-                        (string_content)
+                        (content)
                     )
                 )
             )
@@ -51,11 +51,11 @@ workflow Test {
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
-                        (string_content)
+                        (content)
                         (escape_sequence)
-                        (string_content)
+                        (content)
                         (escape_sequence)
-                        (string_content)
+                        (content)
                     )
                 )
             )
@@ -64,7 +64,7 @@ workflow Test {
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
-                        (string_content)
+                        (content)
                     )
                 )
             )
@@ -73,11 +73,11 @@ workflow Test {
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
-                        (string_content)
+                        (content)
                         (escape_sequence)
-                        (string_content)
+                        (content)
                         (escape_sequence)
-                        (string_content)
+                        (content)
                     )
                 )
             )
@@ -86,7 +86,7 @@ workflow Test {
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
-                        (string_content)
+                        (content)
                     )
                 )
             )
@@ -95,7 +95,7 @@ workflow Test {
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
-                        (string_content)
+                        (content)
                     )
                 )
             )
@@ -104,11 +104,11 @@ workflow Test {
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
-                        (string_content)
+                        (content)
                         (placeholder
                             expression: (identifier)
                         )
-                        (string_content)
+                        (content)
                     )
                 )
             )
@@ -117,13 +117,13 @@ workflow Test {
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
-                        (string_content)
+                        (content)
                         (escape_sequence)
                         (placeholder
                             expression: (identifier)
                         )
                         (escape_sequence)
-                        (string_content)
+                        (content)
                     )
                 )
             )
@@ -132,26 +132,26 @@ workflow Test {
                 name: (identifier)
                 expression: (string
                     parts: (string_parts
-                        (string_content)
+                        (content)
                         (placeholder
                             expression: (apply_expression
                                 name: (identifier)
                                 arguments: (argument_list
                                     (string
                                         parts: (string_parts
-                                            (string_content)
+                                            (content)
                                         )
                                     )
                                     (array
                                         elements: (array_elements
                                             (string
                                                 parts: (string_parts
-                                                    (string_content)
+                                                    (content)
                                                 )
                                             )
                                             (string
                                                 parts: (string_parts
-                                                    (string_content)
+                                                    (content)
                                                 )
                                             )
                                         )
@@ -159,7 +159,7 @@ workflow Test {
                                 )
                             )
                         )
-                        (string_content)
+                        (content)
                     )
                 )
             )

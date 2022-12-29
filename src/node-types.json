@@ -513,7 +513,7 @@
       "required": true,
       "types": [
         {
-          "type": "command_content",
+          "type": "content",
           "named": true
         },
         {
@@ -1909,6 +1909,10 @@
       "required": true,
       "types": [
         {
+          "type": "content",
+          "named": true
+        },
+        {
           "type": "escape_sequence",
           "named": true
         },
@@ -2485,11 +2489,11 @@
     "named": false
   },
   {
-    "type": "command_content",
+    "type": "comment",
     "named": true
   },
   {
-    "type": "comment",
+    "type": "content",
     "named": true
   },
   {

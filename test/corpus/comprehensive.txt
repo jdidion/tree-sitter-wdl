@@ -386,11 +386,11 @@ task Task1 {
             )
             (command
                 parts: (command_parts
-                    (command_content)
+                    (content)
                     (placeholder
                         expression: (identifier)
                     )
-                    (command_content)
+                    (content)
                 )
             )
             (output
