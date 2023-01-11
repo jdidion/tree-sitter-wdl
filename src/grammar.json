@@ -1144,13 +1144,8 @@
             "name": "nonempty_array_type"
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_maybe_empty_array_type"
-            },
-            "named": true,
-            "value": "array_type"
+            "type": "SYMBOL",
+            "name": "array_type"
           }
         ]
       }
@@ -1159,8 +1154,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_maybe_empty_array_type"
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "SYMBOL",
+            "name": "array_type"
+          }
         },
         {
           "type": "STRING",
@@ -1168,7 +1167,7 @@
         }
       ]
     },
-    "_maybe_empty_array_type": {
+    "array_type": {
       "type": "SEQ",
       "members": [
         {

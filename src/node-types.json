@@ -1292,50 +1292,6 @@
           {
             "type": "array_type",
             "named": true
-          },
-          {
-            "type": "boolean_type",
-            "named": true
-          },
-          {
-            "type": "file_type",
-            "named": true
-          },
-          {
-            "type": "float_type",
-            "named": true
-          },
-          {
-            "type": "int_type",
-            "named": true
-          },
-          {
-            "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "nonempty_array_type",
-            "named": true
-          },
-          {
-            "type": "object_type",
-            "named": true
-          },
-          {
-            "type": "optional_type",
-            "named": true
-          },
-          {
-            "type": "pair_type",
-            "named": true
-          },
-          {
-            "type": "string_type",
-            "named": true
-          },
-          {
-            "type": "user_type",
-            "named": true
           }
         ]
       }

@@ -155,8 +155,10 @@ task Task1 {
             )
             (struct_field
                 type: (nonempty_array_type
-                    type: (optional_type
-                        type: (file_type)
+                    type: (array_type
+                        type: (optional_type
+                            type: (file_type)
+                        )
                     )
                 )
                 name: (identifier)

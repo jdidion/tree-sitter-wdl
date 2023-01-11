@@ -92,7 +92,7 @@ const SYMBOL = {
 const PREC = {
     number: 12,
     group: 11,
-    member: 10,
+    field: 10,
     index: 9,
     apply: 8,
     unary: 7,
@@ -388,15 +388,15 @@ module.exports = grammar({
 
         _array_type: $ => prec.right(choice(
             $.nonempty_array_type,
-            alias($._maybe_empty_array_type, $.array_type)
+            $.array_type
         )),
 
         nonempty_array_type: $ => seq(
-            $._maybe_empty_array_type,
+            field("type", $.array_type),
             OPER.non_empty,
         ),
 
-        _maybe_empty_array_type: $ => seq(
+        array_type: $ => seq(
             KEYWORD.array,
             SYMBOL.lbrack,
             field("type", $._type),
@@ -480,7 +480,7 @@ module.exports = grammar({
             SYMBOL.rbrack
         )),
 
-        field_expression: $ => prec(PREC.member, seq(
+        field_expression: $ => prec(PREC.field, seq(
             field("object", $.primary_expression),
             SYMBOL.dot,
             field("name", $.identifier)
