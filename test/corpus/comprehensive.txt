@@ -93,335 +93,337 @@ task Task1 {
 ---
 
 (document
-    (version
+    version: (version
         identifier: (float)
     )
-    (import
-        uri: (simple_string
-            parts: (string_parts
-                (content)
-            )
-        )
-        namespace: (identifier)
-        aliases: (import_aliases
-            (import_alias 
-                from: (identifier)
-                to: (identifier)
-            )
-        )
-    )
-    (import
-        uri: (simple_string
-            parts: (string_parts
-                (content)
-            )
-        )
-        namespace: (identifier)
-        aliases: (import_aliases
-            (import_alias 
-                from: (identifier)
-                to: (identifier)
-            )
-        )
-    )
-    (struct
-        name: (identifier)
-        fields: (struct_fields
-            (struct_field
-                type: (float_type)
-                name: (identifier)
-            )
-            (struct_field
-                type: (map_type
-                    key: (string_type)
-                    value: (int_type)
+    body: (document_body
+        (import
+            uri: (simple_string
+                parts: (string_parts
+                    (content)
                 )
-                name: (identifier)
+            )
+            namespace: (identifier)
+            aliases: (import_aliases
+                (import_alias 
+                    from: (identifier)
+                    to: (identifier)
+                )
             )
         )
-    )
-    (struct
-        name: (identifier)
-        fields: (struct_fields
-            (struct_field
-                type: (string_type)
-                name: (identifier)
-            )
-            (struct_field
-                type: (optional_type
-                    type: (int_type)
+        (import
+            uri: (simple_string
+                parts: (string_parts
+                    (content)
                 )
-                name: (identifier)
             )
-            (struct_field
-                type: (nonempty_array_type
-                    type: (array_type
-                        type: (optional_type
-                            type: (file_type)
-                        )
-                    )
+            namespace: (identifier)
+            aliases: (import_aliases
+                (import_alias 
+                    from: (identifier)
+                    to: (identifier)
                 )
-                name: (identifier)
             )
-            (struct_field
-                type: (user_type
+        )
+        (struct
+            name: (identifier)
+            fields: (struct_fields
+                (struct_field
+                    type: (float_type)
                     name: (identifier)
                 )
-                name: (identifier)
+                (struct_field
+                    type: (map_type
+                        key: (string_type)
+                        value: (int_type)
+                    )
+                    name: (identifier)
+                )
             )
         )
-    )
-    (workflow
-        name: (identifier)
-        body: (workflow_body
-            (input
-                declarations: (input_declarations
-                    (unbound_declaration
-                        type: (string_type)
-                        name: (identifier)
-                    )
-                    (bound_declaration
+        (struct
+            name: (identifier)
+            fields: (struct_fields
+                (struct_field
+                    type: (string_type)
+                    name: (identifier)
+                )
+                (struct_field
+                    type: (optional_type
                         type: (int_type)
-                        name: (identifier)
-                        expression: (dec_int)
                     )
-                    (unbound_declaration
-                        type: (optional_type
-                            type: (user_type
-                                name: (identifier)
+                    name: (identifier)
+                )
+                (struct_field
+                    type: (nonempty_array_type
+                        type: (array_type
+                            type: (optional_type
+                                type: (file_type)
                             )
                         )
+                    )
+                    name: (identifier)
+                )
+                (struct_field
+                    type: (user_type
                         name: (identifier)
                     )
+                    name: (identifier)
                 )
             )
-            (bound_declaration
-                type: (float_type)
-                name: (identifier)
-                expression: (binary_operator
-                    left: (identifier)
-                    right: (float)
-                )
-            )
-            (bound_declaration
-                type: (array_type
-                    type: (file_type)
-                )
-                name: (identifier)
-                expression: (ternary_expression
-                    condition: (apply_expression
-                        name: (identifier)
-                        arguments: (argument_list
-                            (identifier)
+        )
+        (workflow
+            name: (identifier)
+            body: (workflow_body
+                (input
+                    declarations: (input_declarations
+                        (unbound_declaration
+                            type: (string_type)
+                            name: (identifier)
+                        )
+                        (bound_declaration
+                            type: (int_type)
+                            name: (identifier)
+                            expression: (dec_int)
+                        )
+                        (unbound_declaration
+                            type: (optional_type
+                                type: (user_type
+                                    name: (identifier)
+                                )
+                            )
+                            name: (identifier)
                         )
                     )
-                    true: (apply_expression
-                        name: (identifier)
-                        arguments: (argument_list
-                            (field_expression
-                                object: (apply_expression
-                                    name: (identifier)
-                                    arguments: (argument_list
-                                        (array
-                                            elements: (array_elements
-                                                (identifier)
+                )
+                (bound_declaration
+                    type: (float_type)
+                    name: (identifier)
+                    expression: (binary_operator
+                        left: (identifier)
+                        right: (float)
+                    )
+                )
+                (bound_declaration
+                    type: (array_type
+                        type: (file_type)
+                    )
+                    name: (identifier)
+                    expression: (ternary_expression
+                        condition: (apply_expression
+                            name: (identifier)
+                            arguments: (argument_list
+                                (identifier)
+                            )
+                        )
+                        true: (apply_expression
+                            name: (identifier)
+                            arguments: (argument_list
+                                (field_expression
+                                    object: (apply_expression
+                                        name: (identifier)
+                                        arguments: (argument_list
+                                            (array
+                                                elements: (array_elements
+                                                    (identifier)
+                                                )
                                             )
                                         )
                                     )
+                                    name: (identifier)
                                 )
-                                name: (identifier)
                             )
                         )
-                    )
-                    false: (array
-                        elements: (array_elements)
-                    )
-                )   
-            )
-            (call
-                target: (qualified_identifier
-                    (identifier)
-                    (identifier)
+                        false: (array
+                            elements: (array_elements)
+                        )
+                    )   
                 )
-            )
-            (call
-                target: (qualified_identifier
-                    (identifier)
-                    (identifier)
-                )
-                alias: (identifier)
-                inputs: (call_inputs)
-            )
-            (call
-                target: (qualified_identifier
-                    (identifier)
-                    (identifier)
-                )
-                inputs: (call_inputs)
-            )
-            (call
-                target: (qualified_identifier
-                    (identifier)
-                    (identifier)
-                )
-                inputs: (call_inputs
-                    (call_input
-                        name: (identifier)
-                        expression: (dec_int)
-                    )
-                    (call_input
-                        name: (identifier)
-                        expression: (false)
+                (call
+                    target: (qualified_identifier
+                        (identifier)
+                        (identifier)
                     )
                 )
-            )
-            (conditional
-                expression: (comparison_operator
-                    left: (dec_int)
-                    right: (dec_int)
+                (call
+                    target: (qualified_identifier
+                        (identifier)
+                        (identifier)
+                    )
+                    alias: (identifier)
+                    inputs: (call_inputs)
                 )
-                body: (conditional_body
-                    (scatter
-                        name: (identifier)
-                        expression: (identifier)
-                        body: (scatter_body
-                            (call
-                                target: (qualified_identifier
-                                    (identifier)
-                                    (identifier)
-                                )
-                                inputs: (call_inputs
-                                    (call_input
-                                        name: (identifier)
+                (call
+                    target: (qualified_identifier
+                        (identifier)
+                        (identifier)
+                    )
+                    inputs: (call_inputs)
+                )
+                (call
+                    target: (qualified_identifier
+                        (identifier)
+                        (identifier)
+                    )
+                    inputs: (call_inputs
+                        (call_input
+                            name: (identifier)
+                            expression: (dec_int)
+                        )
+                        (call_input
+                            name: (identifier)
+                            expression: (false)
+                        )
+                    )
+                )
+                (conditional
+                    expression: (comparison_operator
+                        left: (dec_int)
+                        right: (dec_int)
+                    )
+                    body: (conditional_body
+                        (scatter
+                            name: (identifier)
+                            expression: (identifier)
+                            body: (scatter_body
+                                (call
+                                    target: (qualified_identifier
+                                        (identifier)
+                                        (identifier)
+                                    )
+                                    inputs: (call_inputs
+                                        (call_input
+                                            name: (identifier)
+                                        )
                                     )
                                 )
                             )
                         )
                     )
                 )
-            )
-            (output
-                declarations: (output_declarations
-                    (bound_declaration
-                        type: (file_type)
-                        name: (identifier)
-                        expression: (field_expression
-                            object: (identifier)
+                (output
+                    declarations: (output_declarations
+                        (bound_declaration
+                            type: (file_type)
                             name: (identifier)
+                            expression: (field_expression
+                                object: (identifier)
+                                name: (identifier)
+                            )
                         )
                     )
                 )
-            )
-            (meta
-                attributes: (meta_attributes
-                    (meta_attribute
-                        name: (identifier)
-                        value: (simple_string
-                            parts: (string_parts
-                                (content)
-                            )
-                        )
-                    )
-                    (meta_attribute
-                        name: (identifier)
-                        value: (true)
-                    )
-                    (meta_attribute
-                        name: (identifier)
-                        value: (dec_int)
-                    )
-                    (meta_attribute
-                        name: (identifier)
-                        value: (meta_array
-                            elements: (meta_array_elements
-                                (dec_int)
-                                (dec_int)
-                                (dec_int)
-                            )
-                        )
-                    )
-                    (meta_attribute
-                        name: (identifier)
-                        value: (meta_object
-                            fields: (meta_object_fields
-                                (meta_object_field
-                                    name: (identifier)
-                                    value: (float)
-                                )
-                                (meta_object_field
-                                    name: (identifier)
-                                    value: (dec_int)
+                (meta
+                    attributes: (meta_attributes
+                        (meta_attribute
+                            name: (identifier)
+                            value: (simple_string
+                                parts: (string_parts
+                                    (content)
                                 )
                             )
                         )
-                    )
-                    (meta_attribute
-                        name: (identifier)
-                        value: (null)
+                        (meta_attribute
+                            name: (identifier)
+                            value: (true)
+                        )
+                        (meta_attribute
+                            name: (identifier)
+                            value: (dec_int)
+                        )
+                        (meta_attribute
+                            name: (identifier)
+                            value: (meta_array
+                                elements: (meta_array_elements
+                                    (dec_int)
+                                    (dec_int)
+                                    (dec_int)
+                                )
+                            )
+                        )
+                        (meta_attribute
+                            name: (identifier)
+                            value: (meta_object
+                                fields: (meta_object_fields
+                                    (meta_object_field
+                                        name: (identifier)
+                                        value: (float)
+                                    )
+                                    (meta_object_field
+                                        name: (identifier)
+                                        value: (dec_int)
+                                    )
+                                )
+                            )
+                        )
+                        (meta_attribute
+                            name: (identifier)
+                            value: (null)
+                        )
                     )
                 )
             )
         )
-    )
-    (task
-        name: (identifier)
-        body: (task_elements
-            (input
-                declarations: (input_declarations
-                    (unbound_declaration
-                        type: (string_type)
-                        name: (identifier)
+        (task
+            name: (identifier)
+            body: (task_elements
+                (input
+                    declarations: (input_declarations
+                        (unbound_declaration
+                            type: (string_type)
+                            name: (identifier)
+                        )
+                        (unbound_declaration
+                            type: (optional_type
+                                type: (user_type
+                                    name: (identifier)
+                                )
+                            )
+                            name: (identifier)
+                        )
+                        (unbound_declaration
+                            type: (string_type)
+                            name: (identifier)
+                        )
                     )
-                    (unbound_declaration
-                        type: (optional_type
-                            type: (user_type
+                )
+                (command
+                    parts: (command_parts
+                        (content)
+                        (placeholder
+                            expression: (identifier)
+                        )
+                        (content)
+                    )
+                )
+                (output
+                    declarations: (output_declarations
+                        (bound_declaration
+                            type: (file_type)
+                            name: (identifier)
+                            expression: (apply_expression
                                 name: (identifier)
+                                arguments: (argument_list)
                             )
                         )
-                        name: (identifier)
-                    )
-                    (unbound_declaration
-                        type: (string_type)
-                        name: (identifier)
                     )
                 )
-            )
-            (command
-                parts: (command_parts
-                    (content)
-                    (placeholder
-                        expression: (identifier)
-                    )
-                    (content)
-                )
-            )
-            (output
-                declarations: (output_declarations
-                    (bound_declaration
-                        type: (file_type)
-                        name: (identifier)
-                        expression: (apply_expression
+                (runtime
+                    attributes: (runtime_attributes
+                        (runtime_attribute
                             name: (identifier)
-                            arguments: (argument_list)
+                            expression: (identifier)
                         )
                     )
                 )
-            )
-            (runtime
-                attributes: (runtime_attributes
-                    (runtime_attribute
-                        name: (identifier)
-                        expression: (identifier)
-                    )
-                )
-            )
-            (meta
-                attributes: (meta_attributes
-                    (meta_attribute
-                        name: (identifier)
-                        value: (simple_string
-                            parts: (string_parts
-                                (content)
+                (meta
+                    attributes: (meta_attributes
+                        (meta_attribute
+                            name: (identifier)
+                            value: (simple_string
+                                parts: (string_parts
+                                    (content)
+                                )
                             )
                         )
                     )

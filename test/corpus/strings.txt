@@ -21,145 +21,147 @@ workflow Test {
 ---
 
 (document
-    (version
+    version: (version
         identifier: (float)
     )
-    (workflow
-        name: (identifier)
-        body: (workflow_body
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string)
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string)
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (content)
-                    )
+    body: (document_body
+        (workflow
+            name: (identifier)
+            body: (workflow_body
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string)
                 )
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (content)
-                        (escape_sequence)
-                        (content)
-                        (escape_sequence)
-                        (content)
-                    )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string)
                 )
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (content)
-                    )
-                )
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (content)
-                        (escape_sequence)
-                        (content)
-                        (escape_sequence)
-                        (content)
-                    )
-                )
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (content)
-                    )
-                )
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (content)
-                    )
-                )
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (content)
-                        (placeholder
-                            expression: (identifier)
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
                         )
-                        (content)
                     )
                 )
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (content)
-                        (escape_sequence)
-                        (placeholder
-                            expression: (identifier)
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                            (escape_sequence)
+                            (content)
+                            (escape_sequence)
+                            (content)
                         )
-                        (escape_sequence)
-                        (content)
                     )
                 )
-            )
-            (bound_declaration
-                type: (string_type)
-                name: (identifier)
-                expression: (string
-                    parts: (string_parts
-                        (content)
-                        (placeholder
-                            expression: (apply_expression
-                                name: (identifier)
-                                arguments: (argument_list
-                                    (string
-                                        parts: (string_parts
-                                            (content)
-                                        )
-                                    )
-                                    (array
-                                        elements: (array_elements
-                                            (string
-                                                parts: (string_parts
-                                                    (content)
-                                                )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                            (escape_sequence)
+                            (content)
+                            (escape_sequence)
+                            (content)
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                            (placeholder
+                                expression: (identifier)
+                            )
+                            (content)
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                            (escape_sequence)
+                            (placeholder
+                                expression: (identifier)
+                            )
+                            (escape_sequence)
+                            (content)
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                            (placeholder
+                                expression: (apply_expression
+                                    name: (identifier)
+                                    arguments: (argument_list
+                                        (string
+                                            parts: (string_parts
+                                                (content)
                                             )
-                                            (string
-                                                parts: (string_parts
-                                                    (content)
+                                        )
+                                        (array
+                                            elements: (array_elements
+                                                (string
+                                                    parts: (string_parts
+                                                        (content)
+                                                    )
+                                                )
+                                                (string
+                                                    parts: (string_parts
+                                                        (content)
+                                                    )
                                                 )
                                             )
                                         )
                                     )
                                 )
                             )
+                            (content)
                         )
-                        (content)
                     )
                 )
             )

@@ -71,354 +71,356 @@ workflow Test {
 ---
 
 (document
-    (version
+    version: (version
         identifier: (float)
     )
-    (workflow
-        name: (identifier)
-        body: (workflow_body
-            (comment)
-            (bound_declaration
-                type: (boolean_type)
-                name: (identifier)
-                expression: (true)
-            )
-            (bound_declaration
-                type: (boolean_type)
-                name: (identifier)
-                expression: (false)
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (dec_int)
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (dec_int)
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (dec_int)
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (hex_int)
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (oct_int)
-            )
-            (bound_declaration
-                type: (float_type)
-                name: (identifier)
-                expression: (float)
-            )
-            (bound_declaration
-                type: (float_type)
-                name: (identifier)
-                expression: (float)
-            )
-            (bound_declaration
-                type: (float_type)
-                name: (identifier)
-                expression: (float)
-            )
-            (bound_declaration
-                type: (float_type)
-                name: (identifier)
-                expression: (float)
-            )
-            (bound_declaration
-                type: (float_type)
-                name: (identifier)
-                expression: (float)
-            )
-            (bound_declaration
-                type: (float_type)
-                name: (identifier)
-                expression: (float)
-            )
-            (bound_declaration
-                type: (float_type)
-                name: (identifier)
-                expression: (float)
-            )
-            (bound_declaration
-                type: (array_type
-                    type: (int_type)
-                )
-                name: (identifier)
-                expression: (array
-                    elements: (array_elements)
-                )   
-            )
-            (bound_declaration
-                type: (array_type
-                    type: (int_type)
-                )
-                name: (identifier)
-                expression: (array
-                    elements: (array_elements
-                        (dec_int)
-                        (dec_int)
-                        (dec_int)
-                    )
-                )   
-            )
-            (bound_declaration
-                type: (map_type
-                    key: (int_type)
-                    value: (boolean_type)
-                )        
-                name: (identifier)
-                expression: (map
-                    entries: (map_entries)
-                )
-            )
-            (bound_declaration
-                type: (map_type
-                    key: (int_type)
-                    value: (boolean_type)
-                )
-                name: (identifier)
-                expression: (map
-                    entries: (map_entries
-                        (map_entry
-                            key: (dec_int)
-                            value: (true)
-                        )
-                        (map_entry
-                            key: (dec_int)
-                            value: (false)
-                        )
-                    )
-                )   
-            )
-            (bound_declaration
-                type: (pair_type
-                    left: (int_type)
-                    right: (float_type)
-                )
-                name: (identifier)
-                expression: (pair
-                    left: (dec_int)
-                    right: (float)
-                )
-            )
-            (bound_declaration
-                type: (object_type)
-                name: (identifier)
-                expression: (object
-                    fields: (object_fields)
-                )
-            )
-            (bound_declaration
-                type: (object_type)
-                name: (identifier)
-                expression: (object
-                    fields: (object_fields
-                        (object_field
-                            name: (identifier)
-                            expression: (true)
-                        )
-                        (object_field
-                            name: (identifier)
-                            expression: (dec_int)
-                        )
-                        (object_field
-                            name: (identifier)
-                            expression: (float)
-                        )
-                    )
-                )
-            )
-            (bound_declaration
-                type: (user_type 
+    body: (document_body
+        (workflow
+            name: (identifier)
+            body: (workflow_body
+                (comment)
+                (bound_declaration
+                    type: (boolean_type)
                     name: (identifier)
+                    expression: (true)
                 )
-                name: (identifier)
-                expression: (object
-                    type: (identifier)
-                    fields: (object_fields
-                        (object_field
-                            name: (identifier)
-                            expression: (true)
+                (bound_declaration
+                    type: (boolean_type)
+                    name: (identifier)
+                    expression: (false)
+                )
+                (bound_declaration
+                    type: (int_type)
+                    name: (identifier)
+                    expression: (dec_int)
+                )
+                (bound_declaration
+                    type: (int_type)
+                    name: (identifier)
+                    expression: (dec_int)
+                )
+                (bound_declaration
+                    type: (int_type)
+                    name: (identifier)
+                    expression: (dec_int)
+                )
+                (bound_declaration
+                    type: (int_type)
+                    name: (identifier)
+                    expression: (hex_int)
+                )
+                (bound_declaration
+                    type: (int_type)
+                    name: (identifier)
+                    expression: (oct_int)
+                )
+                (bound_declaration
+                    type: (float_type)
+                    name: (identifier)
+                    expression: (float)
+                )
+                (bound_declaration
+                    type: (float_type)
+                    name: (identifier)
+                    expression: (float)
+                )
+                (bound_declaration
+                    type: (float_type)
+                    name: (identifier)
+                    expression: (float)
+                )
+                (bound_declaration
+                    type: (float_type)
+                    name: (identifier)
+                    expression: (float)
+                )
+                (bound_declaration
+                    type: (float_type)
+                    name: (identifier)
+                    expression: (float)
+                )
+                (bound_declaration
+                    type: (float_type)
+                    name: (identifier)
+                    expression: (float)
+                )
+                (bound_declaration
+                    type: (float_type)
+                    name: (identifier)
+                    expression: (float)
+                )
+                (bound_declaration
+                    type: (array_type
+                        type: (int_type)
+                    )
+                    name: (identifier)
+                    expression: (array
+                        elements: (array_elements)
+                    )   
+                )
+                (bound_declaration
+                    type: (array_type
+                        type: (int_type)
+                    )
+                    name: (identifier)
+                    expression: (array
+                        elements: (array_elements
+                            (dec_int)
+                            (dec_int)
+                            (dec_int)
                         )
-                        (object_field
-                            name: (identifier)
-                            expression: (dec_int)
-                        )
-                        (object_field
-                            name: (identifier)
-                            expression: (float)
-                        )
+                    )   
+                )
+                (bound_declaration
+                    type: (map_type
+                        key: (int_type)
+                        value: (boolean_type)
+                    )        
+                    name: (identifier)
+                    expression: (map
+                        entries: (map_entries)
                     )
                 )
-            )
-            (comment)
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (binary_operator
-                    left: (binary_operator
+                (bound_declaration
+                    type: (map_type
+                        key: (int_type)
+                        value: (boolean_type)
+                    )
+                    name: (identifier)
+                    expression: (map
+                        entries: (map_entries
+                            (map_entry
+                                key: (dec_int)
+                                value: (true)
+                            )
+                            (map_entry
+                                key: (dec_int)
+                                value: (false)
+                            )
+                        )
+                    )   
+                )
+                (bound_declaration
+                    type: (pair_type
+                        left: (int_type)
+                        right: (float_type)
+                    )
+                    name: (identifier)
+                    expression: (pair
                         left: (dec_int)
-                        right: (dec_int)
-                    )
-                    right: (dec_int)
-                )
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (binary_operator
-                    left: (dec_int)
-                    right: (binary_operator
-                        left: (dec_int)
-                        right: (dec_int)
+                        right: (float)
                     )
                 )
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (binary_operator
-                    left: (unary_operator
-                        expression: (group_expression
-                            expression: (binary_operator
-                                left: (dec_int)
-                                right: (dec_int)
+                (bound_declaration
+                    type: (object_type)
+                    name: (identifier)
+                    expression: (object
+                        fields: (object_fields)
+                    )
+                )
+                (bound_declaration
+                    type: (object_type)
+                    name: (identifier)
+                    expression: (object
+                        fields: (object_fields
+                            (object_field
+                                name: (identifier)
+                                expression: (true)
+                            )
+                            (object_field
+                                name: (identifier)
+                                expression: (dec_int)
+                            )
+                            (object_field
+                                name: (identifier)
+                                expression: (float)
                             )
                         )
                     )
-                    right: (dec_int)
                 )
-            )
-            (bound_declaration
-                type: (float_type)
-                name: (identifier)
-                expression: (binary_operator
-                    left: (identifier)
-                    right: (identifier)
-                )
-            )
-            (bound_declaration
-                type: (boolean_type)
-                name: (identifier)
-                expression: (and_operator
-                    left: (true)
-                    right: (false)
-                )
-            )
-            (bound_declaration
-                type: (boolean_type)
-                name: (identifier)
-                expression: (comparison_operator
-                    left: (dec_int)
-                    right: (dec_int)
-                )
-            )
-            (bound_declaration
-                type: (boolean_type)
-                name: (identifier)
-                expression: (or_operator
-                    left: (comparison_operator
-                        left: (dec_int)
-                        right: (dec_int)
+                (bound_declaration
+                    type: (user_type 
+                        name: (identifier)
                     )
-                    right: (comparison_operator
-                        left: (dec_int)
-                        right: (dec_int)
-                    )
-                )
-            )
-            (bound_declaration
-                type: (boolean_type)
-                name: (identifier)
-                expression: (not_operator
-                    expression: (group_expression
-                        expression: (or_operator
-                            left: (true)
-                            right: (false)
+                    name: (identifier)
+                    expression: (object
+                        type: (identifier)
+                        fields: (object_fields
+                            (object_field
+                                name: (identifier)
+                                expression: (true)
+                            )
+                            (object_field
+                                name: (identifier)
+                                expression: (dec_int)
+                            )
+                            (object_field
+                                name: (identifier)
+                                expression: (float)
+                            )
                         )
                     )
                 )
-            )
-            (bound_declaration
-                type: (array_type
+                (comment)
+                (bound_declaration
+                    type: (int_type)
+                    name: (identifier)
+                    expression: (binary_operator
+                        left: (binary_operator
+                            left: (dec_int)
+                            right: (dec_int)
+                        )
+                        right: (dec_int)
+                    )
+                )
+                (bound_declaration
+                    type: (int_type)
+                    name: (identifier)
+                    expression: (binary_operator
+                        left: (dec_int)
+                        right: (binary_operator
+                            left: (dec_int)
+                            right: (dec_int)
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (int_type)
+                    name: (identifier)
+                    expression: (binary_operator
+                        left: (unary_operator
+                            expression: (group_expression
+                                expression: (binary_operator
+                                    left: (dec_int)
+                                    right: (dec_int)
+                                )
+                            )
+                        )
+                        right: (dec_int)
+                    )
+                )
+                (bound_declaration
+                    type: (float_type)
+                    name: (identifier)
+                    expression: (binary_operator
+                        left: (identifier)
+                        right: (identifier)
+                    )
+                )
+                (bound_declaration
+                    type: (boolean_type)
+                    name: (identifier)
+                    expression: (and_operator
+                        left: (true)
+                        right: (false)
+                    )
+                )
+                (bound_declaration
+                    type: (boolean_type)
+                    name: (identifier)
+                    expression: (comparison_operator
+                        left: (dec_int)
+                        right: (dec_int)
+                    )
+                )
+                (bound_declaration
+                    type: (boolean_type)
+                    name: (identifier)
+                    expression: (or_operator
+                        left: (comparison_operator
+                            left: (dec_int)
+                            right: (dec_int)
+                        )
+                        right: (comparison_operator
+                            left: (dec_int)
+                            right: (dec_int)
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (boolean_type)
+                    name: (identifier)
+                    expression: (not_operator
+                        expression: (group_expression
+                            expression: (or_operator
+                                left: (true)
+                                right: (false)
+                            )
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (array_type
+                        type: (optional_type
+                            type: (int_type)
+                        )
+                    )    
+                    name: (identifier)
+                    expression: (array
+                        elements: (array_elements
+                            (dec_int)
+                            (none)
+                        )
+                    )   
+                )
+                (bound_declaration
                     type: (optional_type
                         type: (int_type)
                     )
-                )    
-                name: (identifier)
-                expression: (array
-                    elements: (array_elements
-                        (dec_int)
-                        (none)
+                    name: (identifier)
+                    expression: (index_expression
+                        collection: (identifier)
+                        index: (dec_int)
                     )
-                )   
-            )
-            (bound_declaration
-                type: (optional_type
+                )
+                (bound_declaration
                     type: (int_type)
-                )
-                name: (identifier)
-                expression: (index_expression
-                    collection: (identifier)
-                    index: (dec_int)
-                )
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (apply_expression
                     name: (identifier)
-                    arguments: (argument_list
-                        (identifier)
+                    expression: (apply_expression
+                        name: (identifier)
+                        arguments: (argument_list
+                            (identifier)
+                        )
                     )
                 )
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (apply_expression
+                (bound_declaration
+                    type: (int_type)
                     name: (identifier)
-                    arguments: (argument_list
-                        (array
-                            elements: (array_elements
-                                (index_expression
-                                    collection: (identifier)
-                                    index: (dec_int)
+                    expression: (apply_expression
+                        name: (identifier)
+                        arguments: (argument_list
+                            (array
+                                elements: (array_elements
+                                    (index_expression
+                                        collection: (identifier)
+                                        index: (dec_int)
+                                    )
                                 )
                             )
                         )
                     )
                 )
-            )
-            (bound_declaration
-                type: (boolean_type)
-                name: (identifier)
-                expression: (field_expression
-                    object: (identifier)
+                (bound_declaration
+                    type: (boolean_type)
                     name: (identifier)
-                )
-            )
-            (bound_declaration
-                type: (int_type)
-                name: (identifier)
-                expression: (ternary_expression
-                    condition: (comparison_operator
-                        left: (dec_int)
-                        right: (dec_int)
+                    expression: (field_expression
+                        object: (identifier)
+                        name: (identifier)
                     )
-                    true: (dec_int)
-                    false: (dec_int)
                 )
-            )       
+                (bound_declaration
+                    type: (int_type)
+                    name: (identifier)
+                    expression: (ternary_expression
+                        condition: (comparison_operator
+                            left: (dec_int)
+                            right: (dec_int)
+                        )
+                        true: (dec_int)
+                        false: (dec_int)
+                    )
+                )       
+            )
         )
     )
 )

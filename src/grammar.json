@@ -6,34 +6,46 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "version"
+          "type": "FIELD",
+          "name": "version",
+          "content": {
+            "type": "SYMBOL",
+            "name": "version"
+          }
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "body",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "import"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "struct"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "workflow"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "task"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "document_body"
           }
         }
       ]
+    },
+    "document_body": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "import"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "struct"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "workflow"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "task"
+          }
+        ]
+      }
     },
     "version": {
       "type": "SEQ",

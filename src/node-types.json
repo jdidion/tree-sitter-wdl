@@ -644,6 +644,32 @@
   {
     "type": "document",
     "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "document_body",
+            "named": true
+          }
+        ]
+      },
+      "version": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "version",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "document_body",
+    "named": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -659,10 +685,6 @@
         },
         {
           "type": "task",
-          "named": true
-        },
-        {
-          "type": "version",
           "named": true
         },
         {

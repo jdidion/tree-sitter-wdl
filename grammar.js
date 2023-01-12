@@ -134,14 +134,16 @@ module.exports = grammar({
 
     rules: {
         document: $ => seq(
-            $.version,
-            repeat(
-                choice(
-                    $.import,
-                    $.struct,
-                    $.workflow,
-                    $.task
-                )
+            field("version", $.version),
+            field("body", $.document_body)
+        ),
+
+        document_body: $ => repeat1(
+            choice(
+                $.import,
+                $.struct,
+                $.workflow,
+                $.task
             )
         ),
 
