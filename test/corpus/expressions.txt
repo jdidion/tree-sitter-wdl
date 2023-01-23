@@ -14,7 +14,7 @@ workflow Test {
     Int i2 = -1
     Int i3 = +1
     Int i4 = 0xFFFF
-    Int i5 = 0o777
+    Int i5 = 0777
 
     Float f1 = 1e5
     Float f2 = .123

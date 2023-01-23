@@ -1882,17 +1882,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "0o"
-              },
-              {
-                "type": "STRING",
-                "value": "0O"
-              }
-            ]
+            "type": "STRING",
+            "value": "0"
           },
           {
             "type": "PATTERN",
@@ -2313,7 +2304,7 @@
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[0-7]{3}"
+                  "value": "[0-7]{1,3}"
                 },
                 {
                   "type": "PATTERN",

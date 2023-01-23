@@ -532,7 +532,7 @@ module.exports = grammar({
 
         hex_int: $ => token(seq(choice('0x', '0X'), /[\da-fA-F]+/)),
 
-        oct_int: $ => token(seq(choice('0o', '0O'), /[0-7]+/)),
+        oct_int: $ => token(seq('0', /[0-7]+/)),
 
         dec_int: $ => prec.right(PREC.number, token(/[\+-]?\d+/)),
 
@@ -540,7 +540,6 @@ module.exports = grammar({
             const sign = /[\+-]?/
             const digits = /\d+/
             const exponent = seq(/[eE][\+-]?/, digits)
-
             return prec.right(PREC.number, token(choice(
                 seq(sign, digits, '.', optional(digits), optional(exponent)),
                 seq(sign, optional(digits), '.', digits, optional(exponent)),
@@ -612,7 +611,7 @@ module.exports = grammar({
                 /u[a-fA-F\d]{4}/,
                 /U[a-fA-F\d]{8}/,
                 /x[a-fA-F\d]{2}/,
-                /[0-7]{3}/,
+                /[0-7]{1,3}/,
                 /['"nt~$\\]/
             )
         ))),
