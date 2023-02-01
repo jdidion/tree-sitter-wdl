@@ -7,7 +7,6 @@ categories = ["parsing", "text-editors"]
 repository = "https://github.com/jdidion/tree-sitter-wdl"
 edition = "2018"
 license = "MIT"
-
 build = "bindings/rust/build.rs"
 include = [
   "bindings/rust/*",
