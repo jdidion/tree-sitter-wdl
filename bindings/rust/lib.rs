@@ -14,7 +14,8 @@
 //! [language func]: fn.language.html
 //! [Parser]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Parser.html
 //! [tree-sitter]: https://tree-sitter.github.io/
-use tree_sitter::{Language, LanguageError, Parser};
+use thiserror::Error;
+use tree_sitter::{Language, LanguageError, Parser, Tree};
 
 extern "C" {
     fn tree_sitter_wdl() -> Language;
@@ -32,17 +33,34 @@ pub fn language() -> Language {
     unsafe { tree_sitter_wdl() }
 }
 
+#[derive(Error, Debug)]
+pub enum ParserError {
+    #[error("Error creating parser for WDL 1.x")]
+    Language { source: LanguageError },
+    #[error("WDL document is empty")]
+    DocumentEmpty,
+}
+
 /// Returns a `Parser` with the language set to `language()`.
-pub fn parser() -> Result<Parser, LanguageError> {
+pub fn parser() -> Result<Parser, ParserError> {
     let mut parser = Parser::new();
-    parser.set_language(language())?;
+    parser
+        .set_language(language())
+        .map_err(|source| ParserError::Language { source })?;
     Ok(parser)
+}
+
+pub fn parse_document(text: &str) -> Result<Tree, ParserError> {
+    let mut parser = parser()?;
+    parser
+        .parse(text, None)
+        .ok_or_else(|| ParserError::DocumentEmpty)
 }
 
 #[cfg(test)]
 mod tests {
     use super::parser;
-    
+
     #[test]
     fn test_can_load_grammar() {
         parser().expect("Error loading wdl language");

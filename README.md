@@ -11,6 +11,35 @@ See the [Tree-sitter documentation](https://tree-sitter.github.io/tree-sitter/us
 tree-sitter-wdl-1 = "0.1.0"
 ```
 
+A convenience function is provided to create a new TreeSitter parser with the language set to `tree-sitter-wdl-1`:
+
+```rust
+use tree_sitter_wdl_1 as wdl;
+
+fn main() {
+    let parser = wdl::parser().expect("Error creating WDL parser");
+    ...
+}
+```
+
+There is also a convenience function to parse a single document into a `tree_sitter::Tree`:
+
+```rust
+use tree_sitter::Tree;
+use tree_sitter_wdl_1 as wdl;
+
+fn main() {
+    let text = r#"
+    version 1.0
+
+    workflow foo {
+    }
+    "#;
+    let tree: Tree = wdl::parse_document(text).expect("Error parsing WDL parser");
+    ...
+}
+```
+
 ## Design
 
 This repository provides a single [grammar](grammar.js) that parses WDL versions `1.x` (`draft-*` and `development` versions are *not* supported). The grammar is designed to be permissive and error-tolerant. A parser generated from this grammar will allow token combinations that are forbidden by the WDL specification or that are only allowed in certain WDL versions.
