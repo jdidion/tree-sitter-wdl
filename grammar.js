@@ -364,7 +364,7 @@ module.exports = grammar({
 
         _required_type: $ => choice(
             $._simple_type,
-            $._array_type,
+            $.array_type,
             $.map_type,
             $.pair_type,
             $.user_type
@@ -388,22 +388,15 @@ module.exports = grammar({
 
         user_type: $ => prec(0, field("name", $.identifier)),
 
-        _array_type: $ => prec.right(choice(
-            $.nonempty_array_type,
-            $.array_type
-        )),
-
-        nonempty_array_type: $ => seq(
-            field("type", $.array_type),
-            OPER.non_empty,
-        ),
-
-        array_type: $ => seq(
+        array_type: $ => prec.right(seq(
             KEYWORD.array,
             SYMBOL.lbrack,
             field("type", $._type),
             SYMBOL.rbrack,
-        ),
+            optional(field("nonempty", $.nonempty)),
+        )),
+
+        nonempty: $ => token(OPER.non_empty),
 
         map_type: $ => seq(
             KEYWORD.map,

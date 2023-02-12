@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-wdl-1"
 description = "WDL 1.x grammar for the tree-sitter parsing library"
-version = "0.1.6"
+version = "0.1.7"
 keywords = ["incremental", "parsing", "wdl"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/jdidion/tree-sitter-wdl"

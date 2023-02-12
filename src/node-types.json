@@ -223,6 +223,16 @@
     "type": "array_type",
     "named": true,
     "fields": {
+      "nonempty": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "nonempty",
+            "named": true
+          }
+        ]
+      },
       "type": {
         "multiple": false,
         "required": true,
@@ -249,10 +259,6 @@
           },
           {
             "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "nonempty_array_type",
             "named": true
           },
           {
@@ -381,10 +387,6 @@
           },
           {
             "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "nonempty_array_type",
             "named": true
           },
           {
@@ -969,10 +971,6 @@
             "named": true
           },
           {
-            "type": "nonempty_array_type",
-            "named": true
-          },
-          {
             "type": "object_type",
             "named": true
           },
@@ -1020,10 +1018,6 @@
           },
           {
             "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "nonempty_array_type",
             "named": true
           },
           {
@@ -1304,20 +1298,9 @@
     }
   },
   {
-    "type": "nonempty_array_type",
+    "type": "nonempty",
     "named": true,
-    "fields": {
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array_type",
-            "named": true
-          }
-        ]
-      }
-    }
+    "fields": {}
   },
   {
     "type": "not_operator",
@@ -1446,10 +1429,6 @@
           },
           {
             "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "nonempty_array_type",
             "named": true
           },
           {
@@ -1598,10 +1577,6 @@
             "named": true
           },
           {
-            "type": "nonempty_array_type",
-            "named": true
-          },
-          {
             "type": "object_type",
             "named": true
           },
@@ -1649,10 +1624,6 @@
           },
           {
             "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "nonempty_array_type",
             "named": true
           },
           {
@@ -1970,10 +1941,6 @@
             "named": true
           },
           {
-            "type": "nonempty_array_type",
-            "named": true
-          },
-          {
             "type": "object_type",
             "named": true
           },
@@ -2183,10 +2150,6 @@
           },
           {
             "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "nonempty_array_type",
             "named": true
           },
           {
