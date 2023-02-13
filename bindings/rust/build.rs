@@ -9,6 +9,8 @@ fn main() {
         .flag_if_supported("-Wno-trigraphs");
     let parser_path = src_dir.join("parser.c");
     c_config.file(&parser_path);
+    println!("cargo:rerun-if-changed={}", parser_path.to_str().unwrap());
+    c_config.compile("parser");
 
     // compile scanner.cc
     let mut cpp_config = cc::Build::new();
@@ -19,6 +21,6 @@ fn main() {
         .flag_if_supported("-Wno-unused-but-set-variable");
     let scanner_path = src_dir.join("scanner.cc");
     cpp_config.file(&scanner_path);
-    cpp_config.compile("scanner");
     println!("cargo:rerun-if-changed={}", scanner_path.to_str().unwrap());
+    cpp_config.compile("scanner");
 }

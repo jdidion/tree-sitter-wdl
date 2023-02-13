@@ -1,25 +1,13 @@
 //! This crate provides wdl language support for the [tree-sitter][] parsing library.
-//!
-//! Typically, you will use the [language][language func] function to add this language to a
-//! tree-sitter [Parser][], and then use the parser to parse some code:
-//!
-//! ```
-//! let code = "";
-//! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(tree_sitter_wdl::language()).expect("Error loading wdl grammar");
-//! let tree = parser.parse(code, None).unwrap();
-//! ```
-//!
-//! [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-//! [language func]: fn.language.html
-//! [Parser]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Parser.html
-//! [tree-sitter]: https://tree-sitter.github.io/
 use thiserror::Error;
-use tree_sitter::{Language, LanguageError, Parser, Tree};
+use tree_sitter::Language;
 
 extern "C" {
     fn tree_sitter_wdl() -> Language;
 }
+
+/// The source of the WDL tree-sitter grammar description.
+pub const GRAMMAR: &str = include_str!("../../grammar.js");
 
 /// The content of the [`node-types.json`][] file for this grammar.
 ///
@@ -36,21 +24,21 @@ pub fn language() -> Language {
 #[derive(Error, Debug)]
 pub enum ParserError {
     #[error("Error creating parser for WDL 1.x")]
-    Language { source: LanguageError },
+    Language { source: tree_sitter::LanguageError },
     #[error("WDL document is empty")]
     DocumentEmpty,
 }
 
 /// Returns a `Parser` with the language set to `language()`.
-pub fn parser() -> Result<Parser, ParserError> {
-    let mut parser = Parser::new();
+pub fn parser() -> Result<tree_sitter::Parser, ParserError> {
+    let mut parser = tree_sitter::Parser::new();
     parser
         .set_language(language())
         .map_err(|source| ParserError::Language { source })?;
     Ok(parser)
 }
 
-pub fn parse_document(text: &str) -> Result<Tree, ParserError> {
+pub fn parse_document(text: &str) -> Result<tree_sitter::Tree, ParserError> {
     let mut parser = parser()?;
     parser
         .parse(text, None)
@@ -59,10 +47,8 @@ pub fn parse_document(text: &str) -> Result<Tree, ParserError> {
 
 #[cfg(test)]
 mod tests {
-    use super::parser;
-
     #[test]
     fn test_can_load_grammar() {
-        parser().expect("Error loading wdl language");
+        super::parser().expect("Error loading wdl language");
     }
 }

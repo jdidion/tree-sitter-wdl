@@ -1,5 +1,5 @@
 {
-  "name": "treesitter-wdl",
+  "name": "tree-sitter-wdl",
   "version": "0.1.0",
   "description": "TreeSitter grammar for WDL v1.1",
   "main": "bindings/node",
