@@ -7,7 +7,7 @@ extern "C" {
 }
 
 /// The source of the WDL tree-sitter grammar description.
-pub const GRAMMAR: &str = include_str!("../../grammar.js");
+pub const GRAMMAR: &'static str = include_str!("../../grammar.js");
 
 /// The content of the [`node-types.json`][] file for this grammar.
 ///
@@ -19,6 +19,11 @@ pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 /// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
 pub fn language() -> Language {
     unsafe { tree_sitter_wdl() }
+}
+
+#[cfg(feature = "json")]
+pub fn node_types() -> serde_json::Result<serde_json::Value> {
+    serde_json::from_str(NODE_TYPES)
 }
 
 #[derive(Error, Debug)]

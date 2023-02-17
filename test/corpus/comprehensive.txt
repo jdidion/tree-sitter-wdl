@@ -249,7 +249,9 @@ task Task1 {
                         (identifier)
                         (identifier)
                     )
-                    alias: (identifier)
+                    alias: (call_alias
+                        name: (identifier)
+                    )
                     inputs: (call_inputs)
                 )
                 (call

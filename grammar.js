@@ -113,17 +113,19 @@ module.exports = grammar({
     ],
 
     supertypes: $ => [
-        $.expression,
-        $.primary_expression
+        $._expression,
+        $._primary_expression,
+        $._literal,
+        $._primitive
     ],
 
     externals: $ => [
-        $._string_start,
+        $.string_start,
         $.string_content,
-        $._string_end,
-        $._command_start,
+        $.string_end,
+        $.command_start,
         $.command_content,
-        $._command_end,
+        $.command_end,
         // Not used in the grammar, but used in the external scanner to check for error state.
         // This relies on the tree-sitter behavior that when an error is encountered the external
         // scanner is called with all symobls marked as valid.
@@ -210,20 +212,22 @@ module.exports = grammar({
         call: $ => seq(
             KEYWORD.call,
             field("target", $.qualified_identifier),
-            optional(
-                seq(
-                    KEYWORD.as,
-                    field("alias", $.identifier)
-                )
-            ),
+            optional(field("alias", $.call_alias)),
             optional(field("inputs", $.call_inputs))
         ),
 
+        call_alias: $ => seq(
+            KEYWORD.as,
+            field("name", $.identifier)
+        ),
+
         call_inputs: $ => block(
-            seq(
-                KEYWORD.input,
-                SYMBOL.colon,
-                commaSep($.call_input)
+            optional(
+                seq(
+                    KEYWORD.input,
+                    SYMBOL.colon,
+                    commaSep($.call_input)
+                )
             )
         ),
 
@@ -232,7 +236,7 @@ module.exports = grammar({
             optional(
                 seq(
                     OPER.assign,
-                    field("expression", $.expression)
+                    field("expression", $._expression)
                 )
             )
         ),
@@ -242,7 +246,7 @@ module.exports = grammar({
             SYMBOL.lparen,
             field("name", $.identifier),
             KEYWORD.in,
-            field("expression", $.expression),
+            field("expression", $._expression),
             SYMBOL.rparen,
             field("body", alias($.workflow_block, $.scatter_body)),
         ),
@@ -250,7 +254,7 @@ module.exports = grammar({
         conditional: $ => seq(
             KEYWORD.if,
             SYMBOL.lparen,
-            field("expression", $.expression),
+            field("expression", $._expression),
             SYMBOL.rparen,
             field("body", alias($.workflow_block, $.conditional_body)),
         ),
@@ -288,9 +292,9 @@ module.exports = grammar({
 
         command: $ => seq(
             KEYWORD.command,
-            alias($._command_start, SYMBOL.heredoc_start),
+            alias($.command_start, SYMBOL.heredoc_start),
             optional(field("parts", $.command_parts)),
-            alias($._command_end, SYMBOL.heredoc_end)
+            alias($.command_end, SYMBOL.heredoc_end)
         ),
 
         command_parts: $ => repeat1(
@@ -316,7 +320,7 @@ module.exports = grammar({
         runtime_attribute: $ => seq(
             field("name", $.identifier),
             SYMBOL.colon,
-            field("expression", $.expression)
+            field("expression", $._expression)
         ),
 
         input: $ => seq(
@@ -349,7 +353,7 @@ module.exports = grammar({
             field("type", $._type),
             field("name", $.identifier),
             OPER.assign,
-            field("expression", $.expression)
+            field("expression", $._expression)
         ),
 
         _type: $ => prec.right(choice(
@@ -402,7 +406,7 @@ module.exports = grammar({
             KEYWORD.map,
             SYMBOL.lbrack,
             field("key", $._type),
-            ",",
+            SYMBOL.comma,
             field("value", $._type),
             SYMBOL.rbrack
         ),
@@ -411,20 +415,20 @@ module.exports = grammar({
             KEYWORD.pair,
             SYMBOL.lbrack,
             field("left", $._type),
-            ",",
+            SYMBOL.comma,
             field("right", $._type),
             SYMBOL.rbrack
         ),
 
-        expression: $ => choice(
-            $.primary_expression,
+        _expression: $ => choice(
+            $._primary_expression,
             $.and_operator,
             $.or_operator,
             $.not_operator,
             $.comparison_operator
         ),
 
-        primary_expression: $ => choice(
+        _primary_expression: $ => choice(
             $.unary_operator,
             $.binary_operator,
             $.apply_expression,
@@ -438,7 +442,7 @@ module.exports = grammar({
 
         unary_operator: $ => prec(PREC.unary, seq(
             field("operator", choice(OPER.pos, OPER.neg)),
-            field("expression", $.primary_expression)
+            field("expression", $._primary_expression)
         )),
 
         binary_operator: $ => {
@@ -451,9 +455,9 @@ module.exports = grammar({
             ];
 
             return choice(...table.map(([operator, precedence]) => prec.left(precedence, seq(
-                field("left", $.primary_expression),
+                field("left", $._primary_expression),
                 field("operator", operator),
-                field("right", $.primary_expression)
+                field("right", $._primary_expression)
             ))));
         },
 
@@ -464,35 +468,35 @@ module.exports = grammar({
 
         argument_list: $ => seq(
             SYMBOL.lparen,
-            optional(commaSep1($.expression)),
+            optional(commaSep1($._expression)),
             SYMBOL.rparen
         ),
 
         index_expression: $ => prec(PREC.index, seq(
-            field("collection", $.primary_expression),
+            field("collection", $._primary_expression),
             SYMBOL.lbrack,
-            field("index", $.primary_expression),
+            field("index", $._primary_expression),
             SYMBOL.rbrack
         )),
 
         field_expression: $ => prec(PREC.field, seq(
-            field("object", $.primary_expression),
+            field("object", $._primary_expression),
             SYMBOL.dot,
             field("name", $.identifier)
         )),
 
         ternary_expression: $ => prec.right(seq(
             KEYWORD.if,
-            field("condition", $.expression),
+            field("condition", $._expression),
             KEYWORD.then,
-            field("true", $.expression),
+            field("true", $._expression),
             KEYWORD.else,
-            field("false", $.expression)
+            field("false", $._expression)
         )),
 
         group_expression: $ => seq(
             SYMBOL.lparen,
-            field("expression", $.expression),
+            field("expression", $._expression),
             SYMBOL.rparen
         ),
 
@@ -541,9 +545,9 @@ module.exports = grammar({
         },
 
         string: $ => seq(
-            alias($._string_start, SYMBOL.dquote),
+            alias($.string_start, SYMBOL.dquote),
             optional(field("parts", $.string_parts)),
-            alias($._string_end, SYMBOL.dquote)
+            alias($.string_end, SYMBOL.dquote)
         ),
 
         string_parts: $ => repeat1(
@@ -588,13 +592,13 @@ module.exports = grammar({
 
         _tilde_placeholder: $ => seq(
             SYMBOL.tilde_placeholder,
-            field("expression", $.expression),
+            field("expression", $._expression),
             SYMBOL.rbrace
         ),
 
         _dollar_placeholder: $ => seq(
             SYMBOL.dollar_placeholder,
-            field("expression", $.expression),
+            field("expression", $._expression),
             SYMBOL.rbrace
         ),
 
@@ -613,7 +617,7 @@ module.exports = grammar({
 
         array_elements: $ => seq(
             SYMBOL.lbrack,
-            optional(commaSep1($.expression)),
+            optional(commaSep1($._expression)),
             SYMBOL.rbrack
         ),
 
@@ -622,16 +626,16 @@ module.exports = grammar({
         map_entries: $ => block(commaSep1($.map_entry)),
 
         map_entry: $ => seq(
-            field("key", $.expression),
+            field("key", $._expression),
             SYMBOL.colon,
-            field("value", $.expression)
+            field("value", $._expression)
         ),
 
         pair: $ => seq(
             SYMBOL.lparen,
-            field("left", $.expression),
+            field("left", $._expression),
             SYMBOL.comma,
-            field("right", $.expression),
+            field("right", $._expression),
             SYMBOL.rparen
         ),
 
@@ -648,24 +652,24 @@ module.exports = grammar({
         object_field: $ => seq(
             field("name", $.identifier),
             SYMBOL.colon,
-            field("expression", $.expression)
+            field("expression", $._expression)
         ),
 
         and_operator: $ => prec.left(PREC.and, seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", OPER.and),
-            field("right", $.expression)
+            field("right", $._expression)
         )),
 
         or_operator: $ => prec.left(PREC.or, seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", OPER.or),
-            field("right", $.expression)
+            field("right", $._expression)
         )),
 
         not_operator: $ => prec(PREC.unary, seq(
             field("operator", OPER.not),
-            field("expression", $.expression)
+            field("expression", $._expression)
         )),
 
         comparison_operator: $ => {
@@ -679,9 +683,9 @@ module.exports = grammar({
             ];
 
             return choice(...table.map(([operator, precedence]) => prec.left(precedence, seq(
-                field("left", $.primary_expression),
+                field("left", $._primary_expression),
                 field("operator", operator),
-                field("right", $.primary_expression)
+                field("right", $._primary_expression)
             ))));
         },
 
