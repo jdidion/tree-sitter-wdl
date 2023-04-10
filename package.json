@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openwdl/wdl.git"
+    "url": "git+https://github.com/jdidion/tree-sitter-wdl.git"
   },
   "author": "John Didion",
   "license": "MIT",
@@ -28,9 +28,9 @@
     "tree-sitter-cli": "^0.20.7"
   },
   "bugs": {
-    "url": "https://github.com/openwdl/wdl/issues"
+    "url": "https://github.com/jdidion/tree-sitter-wdl/issues"
   },
-  "homepage": "https://github.com/openwdl/wdl#readme",
+  "homepage": "https://github.com/jdidion/tree-sitter-wdl",
   "tree-sitter": [
     {
       "scope": "source.wdl",
