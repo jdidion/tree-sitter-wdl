@@ -52,8 +52,22 @@ pub fn parse_document(text: &str) -> Result<tree_sitter::Tree, ParserError> {
 
 #[cfg(test)]
 mod tests {
+    use std::path::PathBuf;
+
+    /// Test that the parser can be created.
     #[test]
     fn test_can_load_grammar() {
         super::parser().expect("Error loading wdl language");
+    }
+
+    /// Test that a simple WDL file can be parsed.
+    #[test]
+    fn test_parse() {
+        let wdl_file = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("resources")
+            .join("test")
+            .join("comprehensive.wdl");
+        let wdl_source = std::fs::read_to_string(wdl_file).unwrap();
+        super::parse_document(&wdl_source).unwrap();
     }
 }

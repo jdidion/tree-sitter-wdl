@@ -75,6 +75,9 @@ task Task1 {
     command <<<
     echo ~{name} \
         | cat
+    echo ">>"
+    echo ">\>>>"
+    echo ">>\~{"
     >>>
 
     output {
@@ -394,6 +397,10 @@ task Task1 {
                         (placeholder
                             expression: (identifier)
                         )
+                        (content)
+                        (escape_sequence)
+                        (content)
+                        (escape_sequence)
                         (content)
                     )
                 )

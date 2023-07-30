@@ -120,16 +120,11 @@ module.exports = grammar({
     ],
 
     externals: $ => [
-        $.string_start,
-        $.string_content,
-        $.string_end,
-        $.command_start,
-        $.command_content,
-        $.command_end,
+        $.command_heredoc_content,
         // Not used in the grammar, but used in the external scanner to check for error state.
         // This relies on the tree-sitter behavior that when an error is encountered the external
         // scanner is called with all symobls marked as valid.
-        $._error,
+        $.error,
     ],
 
     word: $ => $.identifier,
@@ -292,22 +287,54 @@ module.exports = grammar({
 
         command: $ => seq(
             KEYWORD.command,
-            alias($.command_start, SYMBOL.heredoc_start),
-            optional(field("parts", $.command_parts)),
-            alias($.command_end, SYMBOL.heredoc_end)
-        ),
-
-        command_parts: $ => repeat1(
             choice(
-                $.placeholder,
-                alias($.command_escape_sequence, $.escape_sequence),
-                alias($.command_content, $.content)
+                seq(
+                    field("start", SYMBOL.lbrace),
+                    optional(field("parts", alias($.command_brace_parts, $.command_parts))),
+                    field("end", SYMBOL.rbrace)
+                ),
+                seq(
+                    field("start", SYMBOL.heredoc_start),
+                    optional(field("parts", alias($.command_heredoc_parts, $.command_parts))),
+                    field("end", SYMBOL.heredoc_end)
+                )
             )
         ),
 
+        command_brace_parts: $ => repeat1(
+            choice(
+                $.placeholder,
+                alias($.command_escape_sequence, $.escape_sequence),
+                alias($.command_brace_content, $.content)
+            )
+        ),
+
+        command_brace_content: $ => choice(
+            /([^~$}\\]|\\\n)+/,
+            "~",
+            "$"
+        ),
+
+        command_heredoc_parts: $ => repeat1(
+            choice(
+                $.placeholder,
+                alias($.command_escape_sequence, $.escape_sequence),
+                alias($.command_heredoc_content, $.content)
+            )
+        ),
+
+        // Consider the command `echo ">>\n"` - there is no way to parse 
+        // this without also allowing `echo ">>>"`.
+        // command_heredoc_content: $ => choice(
+        //     />{0,2}[^~>\\]+/,
+        //     />{1,2}~[^{]/,
+        //     "\\\n",
+        //     "~"
+        // ),de
+
         command_escape_sequence: $ => token(prec(1, seq(
             SYMBOL.escape,
-            /[>~$\\]/
+            /[>}~$\\]/
         ))),
 
         runtime: $ => seq(
@@ -520,54 +547,81 @@ module.exports = grammar({
         false: $ => KEYWORD.false,
         none: $ => KEYWORD.none,
 
-        _number: $ => choice(
+        _number: $ => prec.right(PREC.number, choice(
             $.hex_int,
             $.oct_int,
             $.dec_int,
             $.float
-        ),
+        )),
 
-        hex_int: $ => token(seq(choice('0x', '0X'), /[\da-fA-F]+/)),
+        hex_int: $ => /0[xX][\da-fA-F]+/,
 
-        oct_int: $ => token(seq('0', /[0-7]+/)),
+        oct_int: $ => /0[0-7]+/,
 
-        dec_int: $ => prec.right(PREC.number, token(/[\+-]?\d+/)),
+        dec_int: $ => /[\+-]?\d+/,
 
         float: $ => {
             const sign = /[\+-]?/
             const digits = /\d+/
             const exponent = seq(/[eE][\+-]?/, digits)
-            return prec.right(PREC.number, token(choice(
-                seq(sign, digits, '.', optional(digits), optional(exponent)),
-                seq(sign, optional(digits), '.', digits, optional(exponent)),
+            return token(choice(
+                seq(sign, digits, SYMBOL.dot, optional(digits), optional(exponent)),
+                seq(sign, optional(digits), SYMBOL.dot, digits, optional(exponent)),
                 seq(sign, digits, exponent)
-            )))
+            ))
         },
 
-        string: $ => seq(
-            alias($.string_start, SYMBOL.dquote),
-            optional(field("parts", $.string_parts)),
-            alias($.string_end, SYMBOL.dquote)
+        string: $ => choice(
+            seq(
+                field("start", SYMBOL.squote),
+                optional(field("parts", alias($.string_squote_parts, $.string_parts))),
+                field("end", SYMBOL.squote)
+            ),
+            seq(
+                field("start", SYMBOL.dquote),
+                optional(field("parts", alias($.string_dquote_parts, $.string_parts))),
+                field("end", SYMBOL.dquote)
+            ),
         ),
 
-        string_parts: $ => repeat1(
+        string_squote_parts: $ => repeat1(
             choice(
                 $.placeholder,
                 $.escape_sequence,
-                alias($.string_content, $.content)
+                alias($.string_squote_content, $.content)
             )
+        ),
+
+        string_squote_content: $ => choice(
+            /[^'~$\\\n]+/,
+            "~",
+            "$"
+        ),
+
+        string_dquote_parts: $ => repeat1(
+            choice(
+                $.placeholder,
+                $.escape_sequence,
+                alias($.string_dquote_content, $.content)
+            )
+        ),
+
+        string_dquote_content: $ => choice(
+            /[^"~$\\\n]+/,
+            "~",
+            "$"
         ),
 
         simple_string: $ => choice(
             seq(
-                SYMBOL.squote,
+                field("start", SYMBOL.squote),
                 optional(field("parts", alias($.simple_string_squote_parts, $.string_parts))),
-                SYMBOL.squote
+                field("end", SYMBOL.squote)
             ),
             seq(
-                SYMBOL.dquote,
+                field("start", SYMBOL.dquote),
                 optional(field("parts", alias($.simple_string_dquote_parts, $.string_parts))),
-                SYMBOL.dquote
+                field("end", SYMBOL.dquote)
             ),
         ),
 
@@ -585,10 +639,10 @@ module.exports = grammar({
             )
         ),
 
-        placeholder: $ => choice(
+        placeholder: $ => prec(1, choice(
             $._tilde_placeholder,
             $._dollar_placeholder
-        ),
+        )),
 
         _tilde_placeholder: $ => seq(
             SYMBOL.tilde_placeholder,

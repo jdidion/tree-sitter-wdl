@@ -5,6 +5,11 @@ Strings
 version 1.1
 
 workflow Test {
+    input {
+        String name = "John"
+        Boolean b = true
+    }
+
     String s1 = ""
     String s2 = ''
     String s3 = "hello"
@@ -16,6 +21,8 @@ workflow Test {
     String s9 = "hello ~{name}, how are you?"
     String s10 = "hello \"~{name}\", how are you?"
     String s11 = "hello ~{sep(" ", ['John', 'Doe'])}, how are you?"
+    String s12 = "hello ~{if b then "~{name}" else "Buddy"}"
+    String s13 = "~ $"
 }
 
 ---
@@ -28,6 +35,24 @@ workflow Test {
         (workflow
             name: (identifier)
             body: (workflow_body
+                (input
+                    declarations: (input_declarations
+                        (bound_declaration
+                            type: (string_type)
+                            name: (identifier)
+                            expression: (string
+                                parts: (string_parts
+                                    (content)
+                                )
+                            )
+                        )
+                        (bound_declaration
+                            type: (boolean_type)
+                            name: (identifier)
+                            expression: (true)
+                        )
+                    )
+                )
                 (bound_declaration
                     type: (string_type)
                     name: (identifier)
@@ -160,6 +185,43 @@ workflow Test {
                                     )
                                 )
                             )
+                            (content)
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                            (placeholder
+                                expression: (ternary_expression
+                                    condition: (identifier)
+                                    true: (string
+                                        parts: (string_parts
+                                            (placeholder
+                                                expression: (identifier)
+                                            )
+                                        )
+                                    )
+                                    false: (string
+                                        parts: (string_parts
+                                            (content)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+                (bound_declaration
+                    type: (string_type)
+                    name: (identifier)
+                    expression: (string
+                        parts: (string_parts
+                            (content)
+                            (content)
                             (content)
                         )
                     )

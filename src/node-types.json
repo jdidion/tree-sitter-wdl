@@ -530,6 +530,20 @@
     "type": "command",
     "named": true,
     "fields": {
+      "end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": ">>>",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      },
       "parts": {
         "multiple": false,
         "required": false,
@@ -537,6 +551,20 @@
           {
             "type": "command_parts",
             "named": true
+          }
+        ]
+      },
+      "start": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "<<<",
+            "named": false
+          },
+          {
+            "type": "{",
+            "named": false
           }
         ]
       }
@@ -675,7 +703,7 @@
     }
   },
   {
-    "type": "dec_int",
+    "type": "content",
     "named": true,
     "fields": {}
   },
@@ -757,11 +785,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "float",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "group_expression",
@@ -1857,6 +1880,20 @@
     "type": "simple_string",
     "named": true,
     "fields": {
+      "end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "\"",
+            "named": false
+          },
+          {
+            "type": "'",
+            "named": false
+          }
+        ]
+      },
       "parts": {
         "multiple": false,
         "required": false,
@@ -1866,6 +1903,20 @@
             "named": true
           }
         ]
+      },
+      "start": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "\"",
+            "named": false
+          },
+          {
+            "type": "'",
+            "named": false
+          }
+        ]
       }
     }
   },
@@ -1873,6 +1924,20 @@
     "type": "string",
     "named": true,
     "fields": {
+      "end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "\"",
+            "named": false
+          },
+          {
+            "type": "'",
+            "named": false
+          }
+        ]
+      },
       "parts": {
         "multiple": false,
         "required": false,
@@ -1880,6 +1945,20 @@
           {
             "type": "string_parts",
             "named": true
+          }
+        ]
+      },
+      "start": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "\"",
+            "named": false
+          },
+          {
+            "type": "'",
+            "named": false
           }
         ]
       }
@@ -2330,6 +2409,10 @@
     "named": false
   },
   {
+    "type": "$",
+    "named": false
+  },
+  {
     "type": "${",
     "named": false
   },
@@ -2466,7 +2549,7 @@
     "named": true
   },
   {
-    "type": "content",
+    "type": "dec_int",
     "named": true
   },
   {
@@ -2483,6 +2566,10 @@
   },
   {
     "type": "file_type",
+    "named": true
+  },
+  {
+    "type": "float",
     "named": true
   },
   {
@@ -2591,6 +2678,10 @@
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
     "named": false
   },
   {
