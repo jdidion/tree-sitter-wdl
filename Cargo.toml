@@ -1,12 +1,13 @@
 [package]
-name = "tree-sitter-wdl-1"
-description = "WDL 1.x grammar for the tree-sitter parsing library"
-version = "0.1.10"
+name = "tree-sitter-wdl"
+description = "wdl grammar for the tree-sitter parsing library"
+version = "0.0.1"
 keywords = ["incremental", "parsing", "wdl"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/jdidion/tree-sitter-wdl"
+repository = "https://github.com/tree-sitter/tree-sitter-wdl"
 edition = "2018"
 license = "MIT"
+
 build = "bindings/rust/build.rs"
 include = [
   "bindings/rust/*",
@@ -19,19 +20,8 @@ include = [
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-serde_json = { version = "1.0.93", optional = true } 
 thiserror = "1.0.38"
-tree-sitter = "0.20.9"
+tree-sitter = "~0.20.3"
 
 [build-dependencies]
 cc = "1.0"
-
-[features]
-json = ["dep:serde_json"]
-
-[dev-dependencies]
-criterion = "0.4.0"
-
-[[bench]]
-name = "parser"
-harness = false
